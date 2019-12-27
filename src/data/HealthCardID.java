@@ -1,5 +1,7 @@
 package data;
 
+import data.exceptions.FormatErrorException;
+
 final public class HealthCardID {
     private final String personalID;
 
