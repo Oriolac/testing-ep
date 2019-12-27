@@ -2,8 +2,7 @@ import data.HealthCardID;
 import data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class HealthCardIdExceptionsTest {
     private HealthCardID healthCardId;
@@ -27,6 +26,17 @@ public class HealthCardIdExceptionsTest {
         healthCardId1 = new HealthCardID("IBMI473298320193");
         healthCardId2 = new HealthCardID("IBMI473298320193");
         assertTrue(healthCardId1.equals(healthCardId2));
+    }
+
+    @Test
+    public void notEqualsTest() throws FormatErrorException {
+        HealthCardID healthCardId1, healthCardId2;
+        healthCardId1 = new HealthCardID("IBMI473298320193");
+        healthCardId2 = new HealthCardID("ZZZZ473298320193");
+
+        assertFalse(healthCardId1.equals(healthCardId2));
+        assertFalse(healthCardId1.equals(null));
+        assertFalse(healthCardId1.equals("IBMI473298320193"));
     }
 
     @Test
