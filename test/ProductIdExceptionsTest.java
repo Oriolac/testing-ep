@@ -1,27 +1,30 @@
-import data.HealthCardID;
 import data.ProductID;
 import data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.Test;
+import testInterfaces.DataClassesInterfaceTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ProductIdExceptionsTest {
+public class ProductIdExceptionsTest implements DataClassesInterfaceTest {
     private ProductID productID;
 
+    @Override
     @Test
     public void nullConstructorParameterTest() {
         Throwable exception = assertThrows(NullPointerException.class,
                 () -> productID = new ProductID(null));
     }
 
+    @Override
     @Test
-    public void getProductCodeTest() throws FormatErrorException {
+    public void getValueTest() throws FormatErrorException {
         productID = new ProductID("123456789154");
         String code = "123456789154";
         assertTrue(productID.getProductCode().equals(code));
     }
 
+    @Override
     @Test
     public void equalsTest() throws FormatErrorException {
         ProductID productId1, productId2;
@@ -30,6 +33,7 @@ public class ProductIdExceptionsTest {
         assertTrue(productId1.equals(productId2));
     }
 
+    @Override
     @Test
     public void notEqualsTest() throws FormatErrorException {
         ProductID productId1, productId2;
@@ -41,6 +45,7 @@ public class ProductIdExceptionsTest {
         assertFalse(productId1.equals("123456789012"));
     }
 
+    @Override
     @Test
     public void formatErrorExceptionTest() {
         Throwable exception = assertThrows(FormatErrorException.class,
