@@ -2,7 +2,19 @@ package data;
 
 final public class HealthCardID {
     private final String personalID;
-    public HealthCardID(String code) { this.personalID = code; }
+
+    public HealthCardID(String code) throws NullPointerException, FormatErrorException {
+        if (code == null) {
+            throw new NullPointerException("Rebut objecte sense instanciar.");
+        }
+
+        if (isValidCIP(code)) {
+            this.personalID = code;
+        } else {
+            throw new FormatErrorException("Error amb el format del CIP");
+        }
+    }
+
     public String getPersonalID() { return personalID; }
 
     @Override
@@ -21,5 +33,27 @@ final public class HealthCardID {
     @Override
     public String toString() {
         return "HealthCardID(" + "personal code='" + personalID + '\'' + '}';
+    }
+
+    private boolean isValidCIP(String code) {
+        char current_char;
+        if (code.length() != 16) {
+            return false;
+        } else {
+            for(int i=0; i<16; i++) {
+                if (i < 4) {
+                    current_char = code.charAt(i);
+                    if (!Character.isLetter(current_char)) {
+                        return false;
+                    }
+                } else {
+                    current_char = code.charAt(i);
+                    if (!Character.isDigit(current_char)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }
