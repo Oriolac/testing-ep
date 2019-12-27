@@ -13,7 +13,7 @@ final public class HealthCardID {
         if (isValidCIP(code)) {
             this.personalID = code;
         } else {
-            throw new FormatErrorException("Error amb el format del CIP");
+            throw new FormatErrorException("Error amb el format del CIP.");
         }
     }
 
