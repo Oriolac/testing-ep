@@ -54,4 +54,5 @@ public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
         exception = assertThrows(FormatErrorException.class,
                 () -> patientContr = new PatientContr(new BigDecimal("105.0")));
     }
+
 }
