@@ -5,6 +5,7 @@ import data.ProductID;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /***
  * Package for the classes involved in the use case Suply next dispensing
@@ -15,7 +16,7 @@ public class Sale {
     private Date date;
     private BigDecimal amount;
     private boolean isClosed; // flag to know if the sale is closed
-    // ??? Its components, among others
+    private List<ProductSaleLine> productSaleLines;
 
     public Sale() {
 

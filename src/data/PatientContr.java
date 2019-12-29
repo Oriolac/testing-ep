@@ -5,7 +5,7 @@ import data.exceptions.FormatErrorException;
 import java.math.BigDecimal;
 
 final public class PatientContr {
-    private final BigDecimal contribution;
+    private final BigDecimal patCont;
 
     public PatientContr(BigDecimal contribution) throws NullPointerException, FormatErrorException {
         if (contribution==null) {
@@ -13,28 +13,28 @@ final public class PatientContr {
         }
 
         if (isValidContr(contribution)) {
-            this.contribution = contribution;
+            this.patCont = contribution;
         } else {
             throw new FormatErrorException("Error amb el format de l'aportació del pacient.");
         }
     }
 
-    public BigDecimal getContribution() { return contribution; }
+    public BigDecimal getPatCont() { return patCont; }
 
     @Override
-    public int hashCode() { return contribution.hashCode(); }
+    public int hashCode() { return patCont.hashCode(); }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PatientContr patientContr = (PatientContr) o;
-        return (contribution.compareTo(patientContr.contribution)==0);
+        return (patCont.compareTo(patientContr.patCont)==0);
     }
 
     @Override
     public String toString() {
-        return "PatientContribution(" + "contribution='" + contribution + '\'' + '}';
+        return "PatientContribution(" + "patCont='" + patCont + '\'' + '}';
     }
 
     private boolean isValidContr(BigDecimal contribution) {

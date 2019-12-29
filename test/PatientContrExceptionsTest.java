@@ -22,7 +22,7 @@ public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
     public void getValueTest() throws FormatErrorException {
         patientContr = new PatientContr(new BigDecimal("50.0"));
         BigDecimal contribution = new BigDecimal("50.0");
-        assertTrue(patientContr.getContribution().compareTo(contribution) == 0);
+        assertTrue(patientContr.getPatCont().compareTo(contribution) == 0);
     }
 
     @Override
