@@ -2,8 +2,10 @@ package pharmacy;
 
 import data.PatientContr;
 import data.ProductID;
+import pharmacy.exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +21,11 @@ public class Sale {
     private List<ProductSaleLine> productSaleLines;
 
     public Sale() {
-
+        saleCode = hashCode();
+        date = new Date();
+        amount = new BigDecimal("0.0");
+        isClosed = false;
+        productSaleLines = new ArrayList<>();
     }
 
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
@@ -62,5 +68,16 @@ public class Sale {
         return isClosed;
     }
 
-    // the rest of getters, setters and methods
+    public Date getDate() {
+        return date;
+    }
+
+    public int getSaleCode() {
+        return saleCode;
+    }
+
+    public List<ProductSaleLine> getProductSaleLines() {
+        return productSaleLines;
+    }
+
 }
