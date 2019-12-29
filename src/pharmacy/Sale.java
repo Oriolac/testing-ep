@@ -23,31 +23,43 @@ public class Sale {
     }
 
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
-
+        if (!isClosed()) {
+            productSaleLines.add(new ProductSaleLine(prodID, price, contr));
+        } else {
+            throw new SaleClosedException("La venda ja ha estat tancada.");
+        }
     }
 
     private void calculateAmount() {
-
+        for (ProductSaleLine prodSaleLine : productSaleLines) {
+            amount = amount.add(prodSaleLine.getSubtotal());
+        }
     }
 
-    private void addTaxes() {
-
+    private void addTaxes() throws SaleClosedException {
+        if (!isClosed()) {
+            BigDecimal taxes = amount.multiply(new BigDecimal("0.21"));
+            amount = amount.add(taxes);
+        } else {
+            throw new SaleClosedException("La venda ja ha estat tancada.");
+        }
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
-
+        calculateAmount();
+        addTaxes();
     }
 
     public BigDecimal getAmount() {
-
+        return amount;
     }
 
     private void setClosed() {
-
+        isClosed = true;
     }
 
     public boolean isClosed() {
-
+        return isClosed;
     }
 
     // the rest of getters, setters and methods
