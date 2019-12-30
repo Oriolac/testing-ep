@@ -9,5 +9,11 @@ public class ProductSpecification {
     private String description;
     private BigDecimal price;
 
+    public BigDecimal getPrice() {
+        return price;
+    }
 
+    public String getDescription() {
+        return description;
+    }
 }

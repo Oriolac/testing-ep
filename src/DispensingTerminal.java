@@ -1,7 +1,10 @@
 import data.HealthCardID;
+import data.ProductID;
 import pharmacy.Dispensing;
+import pharmacy.ProductSpecification;
 import pharmacy.Sale;
 import pharmacy.exceptions.DispensingNotAvailableException;
+import pharmacy.exceptions.SaleClosedException;
 import services.HealthCardReader;
 import services.NationalHealthService;
 
@@ -42,6 +45,14 @@ public class DispensingTerminal {
             throw new DispensingNotAvailableException("La E-Recepta no està encara habilitada");
         sale = new Sale(ePrescription);
     }
+
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException {
+        ProductSpecification productSpecification = SNS.getProductSpecific(pID);
+        sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
+        ePrescription.setProductAsDispensed(pID);
+    }
+
+
 
 
 }
