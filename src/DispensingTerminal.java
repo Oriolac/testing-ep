@@ -7,6 +7,8 @@ import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.SaleClosedException;
 import services.HealthCardReader;
 import services.NationalHealthService;
+import services.exceptions.QuantityMinorThanImport;
+import services.exceptions.SaleNotClosedException;
 import services.exceptions.SaleNotInitiatedException;
 
 import java.math.BigDecimal;
@@ -60,8 +62,13 @@ public class DispensingTerminal {
         sale.calculateFinalAmount();
     }
 
-    public void realizePayment(BigDecimal quantity) {
-
+    public void realizePayment(BigDecimal quantity) throws QuantityMinorThanImport, SaleNotClosedException {
+        if (!sale.isClosed())
+            throw new SaleNotClosedException("La venda no està tancada.");
+        BigDecimal amount = sale.getAmount();
+        if(amount.compareTo(quantity) < 0)
+            throw new QuantityMinorThanImport("La quantitat és menor que l'import a pagar.");
+        //TODO: S'ha d'acabar de fer a la part opcional!!
     }
 
 
