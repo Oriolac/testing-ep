@@ -7,6 +7,7 @@ package services;
 import data.HealthCardID;
 import data.PatientContr;
 import data.ProductID;
+import pharmacy.Dispensing;
 
 
 public interface NationalHealthService {
