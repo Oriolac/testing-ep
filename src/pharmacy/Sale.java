@@ -19,13 +19,15 @@ public class Sale {
     private BigDecimal amount;
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> productSaleLines;
+    private final Dispensing ePrescription;
 
-    public Sale() {
+    public Sale(Dispensing ePrescription) {
         saleCode = hashCode();
         date = new Date();
         amount = new BigDecimal("0.0");
         isClosed = false;
         productSaleLines = new ArrayList<>();
+        this.ePrescription = ePrescription;
     }
 
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
@@ -79,5 +81,7 @@ public class Sale {
     public List<ProductSaleLine> getProductSaleLines() {
         return productSaleLines;
     }
+
+    public Dispensing getePrescription() { return ePrescription; }
 
 }
