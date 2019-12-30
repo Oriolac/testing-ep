@@ -42,13 +42,7 @@ final public class ProductID {
         if (code.length() != 12) {
             return false;
         } else {
-            for (int i=0; i<12; i++) {
-                current_char = code.charAt(i);
-                if (!Character.isDigit(current_char)) {
-                    return false;
-                }
-            }
-            return true;
+            return code.chars().allMatch(Character::isDigit);
         }
     }
 }
