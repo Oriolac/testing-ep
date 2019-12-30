@@ -7,7 +7,9 @@ import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.SaleClosedException;
 import services.HealthCardReader;
 import services.NationalHealthService;
+import services.exceptions.SaleNotInitiatedException;
 
+import java.math.BigDecimal;
 import java.net.ConnectException;
 
 public class DispensingTerminal {
@@ -52,10 +54,14 @@ public class DispensingTerminal {
         ePrescription.setProductAsDispensed(pID);
     }
 
-    public void finalizeSale() throws SaleClosedException {
+    public void finalizeSale() throws SaleNotInitiatedException, SaleClosedException {
         if (sale == null)
-            throw new SaleClosedException("No hi ha venta en curs");
+            throw new SaleNotInitiatedException("No hi ha venta en curs");
         sale.calculateFinalAmount();
+    }
+
+    public void realizePayment(BigDecimal quantity) {
+
     }
 
 
