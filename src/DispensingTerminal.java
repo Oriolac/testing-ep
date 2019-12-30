@@ -52,7 +52,11 @@ public class DispensingTerminal {
         ePrescription.setProductAsDispensed(pID);
     }
 
-
+    public void finalizeSale() throws SaleClosedException {
+        if (sale == null)
+            throw new SaleClosedException("No hi ha venta en curs");
+        sale.calculateFinalAmount();
+    }
 
 
 }

@@ -52,8 +52,11 @@ public class Sale {
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
+        if (isClosed())
+            throw new SaleClosedException("La venta ja està tancada");
         calculateAmount();
         addTaxes();
+        setClosed();
     }
 
     public BigDecimal getAmount() {
