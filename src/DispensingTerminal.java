@@ -10,6 +10,7 @@ import services.NationalHealthService;
 import services.exceptions.QuantityMinorThanImport;
 import services.exceptions.SaleNotClosedException;
 import services.exceptions.SaleNotInitiatedException;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
@@ -71,5 +72,12 @@ public class DispensingTerminal {
         //TODO: S'ha d'acabar de fer a la part opcional!!
     }
 
+    public void realizePayment() {
+        throw new NotImplementedException();
+    }
+
+    public void printNextDispensingSheet() {
+        throw new NotImplementedException();
+    }
 
 }
