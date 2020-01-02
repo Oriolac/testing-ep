@@ -1,11 +1,12 @@
 package data;
 
 import data.exceptions.FormatErrorException;
+import data.exceptions.HealthCardException;
 
 final public class HealthCardID {
     private final String personalID;
 
-    public HealthCardID(String code) throws NullPointerException, FormatErrorException {
+    public HealthCardID(String code) throws NullPointerException, HealthCardException {
         if (code == null) {
             throw new NullPointerException("Rebut objecte sense instanciar.");
         }
@@ -13,7 +14,7 @@ final public class HealthCardID {
         if (isValidCIP(code)) {
             this.personalID = code;
         } else {
-            throw new FormatErrorException("Error amb el format del CIP.");
+            throw new HealthCardException("Error amb el format del CIP.");
         }
     }
 
