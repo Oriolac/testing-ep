@@ -92,4 +92,8 @@ public class Sale {
 
     public Dispensing getePrescription() { return ePrescription; }
 
+    public DispensingTerminal getDispensingTerminal() {
+        return dispensingTerminal;
+    }
+
 }
