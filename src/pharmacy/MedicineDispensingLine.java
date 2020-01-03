@@ -11,9 +11,10 @@ public class MedicineDispensingLine {
 
     public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) {
         this.ePrescription = ePrescription;
-        acquired = false;
+        this.acquired = false;
         this.productSpec = getProductSpec(productID);
-        productSaleLine = null;
+        this.productSpec.setMedDispensingLine(this);
+        this.productSaleLine = null;
     }
 
     public boolean isAcquired() {

@@ -15,8 +15,8 @@ public class ProductSaleLine {
         this.sale = sale;
         this.medDispensingLine = medDispensingLine;
         this.productSpec = medDispensingLine.getProductSpec();
-        productSpec = null;
-        subtotal = price.multiply(contr.getPatCont());
+        this.productSpec.setProdSaleLine(this);
+        this.subtotal = price.multiply(contr.getPatCont());
     }
 
     public ProductSpecification getProductSpec() {
