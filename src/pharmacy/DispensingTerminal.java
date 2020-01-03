@@ -2,10 +2,12 @@ package pharmacy;
 
 import data.HealthCardID;
 import data.ProductID;
+import data.exceptions.HealthCardException;
 import pharmacy.Dispensing;
 import pharmacy.ProductSpecification;
 import pharmacy.Sale;
 import pharmacy.exceptions.DispensingNotAvailableException;
+import pharmacy.exceptions.NotValidePrescriptionException;
 import pharmacy.exceptions.SaleClosedException;
 import services.HealthCardReader;
 import services.NationalHealthService;
@@ -33,7 +35,7 @@ public class DispensingTerminal {
         this.HCR = HCR;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidPrescriptionException, ConnectException, PatientIDException {
+    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
         switch (option){
             case BY_HEALTHCARD:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
