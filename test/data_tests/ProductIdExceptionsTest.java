@@ -1,8 +1,9 @@
+package data_tests;
+
 import data.ProductID;
-import data.exceptions.FormatErrorException;
 import data.exceptions.ProductIDException;
+import data_tests.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
-import testInterfaces.DataClassesInterfaceTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -46,9 +47,9 @@ public class ProductIdExceptionsTest implements DataClassesInterfaceTest {
     @Override
     @Test
     public void dataErrorExceptionTest() {
-        Throwable exception = assertThrows(FormatErrorException.class,
+        Throwable exception = assertThrows(ProductIDException.class,
                 () -> productID = new ProductID("12345678901"));
-        exception = assertThrows(FormatErrorException.class,
+        exception = assertThrows(ProductIDException.class,
                 () -> productID = new ProductID("12345678901a"));
     }
 }

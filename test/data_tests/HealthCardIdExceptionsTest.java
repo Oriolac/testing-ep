@@ -1,8 +1,9 @@
+package data_tests;
+
 import data.HealthCardID;
-import data.exceptions.FormatErrorException;
 import data.exceptions.HealthCardException;
+import data_tests.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
-import testInterfaces.DataClassesInterfaceTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -45,11 +46,11 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
     @Override
     @Test
     public void dataErrorExceptionTest() {
-        Throwable exception = assertThrows(FormatErrorException.class,
+        Throwable exception = assertThrows(HealthCardException.class,
                 () -> healthCardId = new HealthCardID("IBMI47329832019"));
-        exception = assertThrows(FormatErrorException.class,
+        exception = assertThrows(HealthCardException.class,
                 () -> healthCardId = new HealthCardID("B325897653492301"));
-        exception = assertThrows(FormatErrorException.class,
+        exception = assertThrows(HealthCardException.class,
                 () -> healthCardId = new HealthCardID("BINO89765Z492301"));
     }
 

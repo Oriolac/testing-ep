@@ -1,7 +1,9 @@
+package data_tests;
+
 import data.PatientContr;
 import data.exceptions.FormatErrorException;
+import data_tests.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
-import testInterfaces.DataClassesInterfaceTest;
 
 import java.math.BigDecimal;
 
