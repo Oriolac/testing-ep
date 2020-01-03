@@ -3,11 +3,13 @@ package pharmacy;
 import data.HealthCardID;
 import data.ProductID;
 import data.exceptions.HealthCardException;
+import data.exceptions.ProductIDException;
 import pharmacy.Dispensing;
 import pharmacy.ProductSpecification;
 import pharmacy.Sale;
 import pharmacy.exceptions.DispensingNotAvailableException;
 import pharmacy.exceptions.NotValidePrescriptionException;
+import pharmacy.exceptions.PatientIDException;
 import pharmacy.exceptions.SaleClosedException;
 import services.HealthCardReader;
 import services.NationalHealthService;
@@ -56,7 +58,7 @@ public class DispensingTerminal {
         sale = new Sale(this, ePrescription);
     }
 
-    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException {
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductIDException, HealthCardException {
         ProductSpecification productSpecification = SNS.getProductSpecific(pID);
         sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
         ePrescription.setProductAsDispensed(pID);
@@ -85,7 +87,7 @@ public class DispensingTerminal {
         throw new NotImplementedException();
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) {
+    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
         return SNS.getProductSpecific(productID);
     }
 
