@@ -1,3 +1,5 @@
+package pharmacy;
+
 import data.HealthCardID;
 import data.ProductID;
 import pharmacy.Dispensing;
@@ -35,6 +37,7 @@ public class DispensingTerminal {
         switch (option){
             case BY_HEALTHCARD:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
+                ePrescription.setDispensingTerminal(this);
                 break;
             case BY_SHEET_TREATMENT:
                 break;
@@ -48,7 +51,7 @@ public class DispensingTerminal {
     public void initNewSale() throws DispensingNotAvailableException {
         if(ePrescription == null || !ePrescription.dispensingEnabled())
             throw new DispensingNotAvailableException("La E-Recepta no està encara habilitada");
-        sale = new Sale(ePrescription);
+        sale = new Sale(this, ePrescription);
     }
 
     public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException {
@@ -78,6 +81,10 @@ public class DispensingTerminal {
 
     public void printNextDispensingSheet() {
         throw new NotImplementedException();
+    }
+
+    public ProductSpecification getProductSpec(ProductID productID) {
+        return SNS.getProductSpecific(productID);
     }
 
 }
