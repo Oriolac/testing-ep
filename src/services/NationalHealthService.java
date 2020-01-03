@@ -16,8 +16,6 @@ import pharmacy.exceptions.NotValidePrescriptionException;
 import java.net.ConnectException;
 import java.util.List;
 
-import java.util.List;
-
 
 public interface NationalHealthService {
     Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException;
