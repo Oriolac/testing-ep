@@ -8,14 +8,5 @@ public interface DataClassesInterfaceTest {
     void nullConstructorParameterTest();
 
     @Test
-    void getValueTest() throws FormatErrorException;
-
-    @Test
-    void equalsTest() throws FormatErrorException;
-
-    @Test
-    void notEqualsTest() throws FormatErrorException;
-
-    @Test
-    void formatErrorExceptionTest();
+    void dataErrorExceptionTest();
 }
