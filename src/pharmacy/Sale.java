@@ -35,8 +35,8 @@ public class Sale {
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         if (!isClosed()) {
             // TODO: Comprovar que el producte és un dels dispensables
-            ProductSaleLine prodSaleLine = new ProductSaleLine(this, prodID, price, contr);
-            prodSaleLine.setMedDispensingLine(ePrescription.getMedicineDispensingLine(prodID));
+            MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
+            ProductSaleLine prodSaleLine = new ProductSaleLine(this, medDispensingLine, price, contr);
             productSaleLines.add(prodSaleLine);
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
