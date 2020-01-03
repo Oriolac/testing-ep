@@ -14,6 +14,8 @@ public class Dispensing {
     private Date initDate, finalDate; // The period
     private boolean isCompleted;
     private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
+    private Sale sale;
+    private DispensingTerminal dispensingTerminal;
 
     public Dispensing(Date initDate, Date finalDate, HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines) {
         nOrder = (byte) hashCode();
@@ -37,16 +39,32 @@ public class Dispensing {
         medicineDispensingLines.put(prodID, medDispensingLine);
     }
 
-    public void setCompleted() {
-        isCompleted = true;
-    }
-
     public Date getInitDate() {
         return initDate;
     }
 
+    public ProductSpecification getProductSpec(ProductID productID) {
+        return dispensingTerminal.getProductSpec(productID);
+    }
+
     public Date getFinalDate() {
         return finalDate;
+    }
+
+    public MedicineDispensingLine getMedicineDispensingLine(ProductID productID) {
+        return medicineDispensingLines.get(productID);
+    }
+
+    public void setCompleted() {
+        isCompleted = true;
+    }
+
+    public void setDispensingTerminal(DispensingTerminal dispensingTerminal) {
+        this.dispensingTerminal = dispensingTerminal;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
     }
 
 }
