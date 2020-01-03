@@ -1,4 +1,4 @@
-package testInterfaces;
+package data_tests.testInterfaces;
 
 import data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.Test;
