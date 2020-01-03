@@ -1,5 +1,6 @@
 import data.ProductID;
 import data.exceptions.FormatErrorException;
+import data.exceptions.ProductIDException;
 import org.junit.jupiter.api.Test;
 import testInterfaces.DataClassesInterfaceTest;
 
@@ -16,26 +17,23 @@ public class ProductIdExceptionsTest implements DataClassesInterfaceTest {
                 () -> productID = new ProductID(null));
     }
 
-    @Override
     @Test
-    public void getValueTest() throws FormatErrorException {
+    public void getValueTest() throws ProductIDException {
         productID = new ProductID("123456789154");
         String code = "123456789154";
         assertTrue(productID.getProductCode().equals(code));
     }
 
-    @Override
     @Test
-    public void equalsTest() throws FormatErrorException {
+    public void equalsTest() throws ProductIDException {
         ProductID productId1, productId2;
         productId1 = new ProductID("123456789012");
         productId2 = new ProductID("123456789012");
         assertTrue(productId1.equals(productId2));
     }
 
-    @Override
     @Test
-    public void notEqualsTest() throws FormatErrorException {
+    public void notEqualsTest() throws ProductIDException {
         ProductID productId1, productId2;
         productId1 = new ProductID("123456789012");
         productId2 = new ProductID("123456789011");
@@ -47,7 +45,7 @@ public class ProductIdExceptionsTest implements DataClassesInterfaceTest {
 
     @Override
     @Test
-    public void formatErrorExceptionTest() {
+    public void dataErrorExceptionTest() {
         Throwable exception = assertThrows(FormatErrorException.class,
                 () -> productID = new ProductID("12345678901"));
         exception = assertThrows(FormatErrorException.class,
