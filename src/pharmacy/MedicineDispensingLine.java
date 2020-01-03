@@ -2,6 +2,9 @@ package pharmacy;
 
 
 import data.ProductID;
+import data.exceptions.ProductIDException;
+
+import java.net.ConnectException;
 
 public class MedicineDispensingLine {
     private boolean acquired;
@@ -9,7 +12,7 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
-    public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) {
+    public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) throws ProductIDException, ConnectException {
         this.ePrescription = ePrescription;
         this.acquired = false;
         this.productSpec = getProductSpec(productID);
@@ -33,7 +36,7 @@ public class MedicineDispensingLine {
         return ePrescription;
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) {
+    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
         return ePrescription.getProductSpec(productID);
     }
 
