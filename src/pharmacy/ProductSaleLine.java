@@ -11,7 +11,12 @@ public class ProductSaleLine {
     private ProductSpecification productSpec;
     private BigDecimal subtotal;
 
-    public ProductSaleLine(ProductID prodID, BigDecimal price, PatientContr contr) {
+    public ProductSaleLine(Sale sale, ProductID prodID, BigDecimal price, PatientContr contr) {
+        this.sale = sale;
+        // ...
+    }
 
+    public void setMedDispensingLine(MedicineDispensingLine medDispensingLine) {
+        this.medDispensingLine = medDispensingLine;
     }
 }

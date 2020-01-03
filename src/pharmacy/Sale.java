@@ -20,19 +20,24 @@ public class Sale {
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> productSaleLines;
     private final Dispensing ePrescription;
+    private DispensingTerminal dispensingTerminal;
 
-    public Sale(Dispensing ePrescription) {
+    public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
         date = new Date();
         amount = new BigDecimal("0.0");
         isClosed = false;
         productSaleLines = new ArrayList<>();
         this.ePrescription = ePrescription;
+        this.dispensingTerminal = dispensingTerminal;
     }
 
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         if (!isClosed()) {
-            productSaleLines.add(new ProductSaleLine(prodID, price, contr));
+            // TODO: Comprovar que el producte és un dels dispensables
+            ProductSaleLine prodSaleLine = new ProductSaleLine(this, prodID, price, contr);
+            prodSaleLine.setMedDispensingLine(ePrescription.getMedicineDispensingLine(prodID));
+            productSaleLines.add(prodSaleLine);
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
