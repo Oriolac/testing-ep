@@ -27,8 +27,8 @@ public class ProductSpecificationTest {
         BigDecimal exp_price = new BigDecimal("5.0");
         BigDecimal obt_price = productSpecification.getPrice();
         BigDecimal n_exp_price = new BigDecimal("2.0");
-        assertTrue(exp_price.equals(obt_price));
-        assertFalse(n_exp_price.equals(obt_price));
+        assertTrue(exp_price.compareTo(obt_price) == 0);
+        assertTrue(n_exp_price.compareTo(obt_price) < 0);
     }
 
     @Test

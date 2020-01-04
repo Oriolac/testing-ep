@@ -12,8 +12,8 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
-    public MedicineDispensingLine() {
-
+    public MedicineDispensingLine(ProductSpecification productSpec) {
+        this.productSpec = productSpec;
     }
 
     public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) throws ProductIDException, ConnectException {
