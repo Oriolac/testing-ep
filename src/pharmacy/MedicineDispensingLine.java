@@ -9,6 +9,10 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
+    public MedicineDispensingLine() {
+
+    }
+
     public MedicineDispensingLine(Dispensing ePrescription, ProductSpecification productSpec) {
         this.ePrescription = ePrescription;
         this.acquired = false;

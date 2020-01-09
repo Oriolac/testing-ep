@@ -4,10 +4,7 @@ import data.PatientContr;
 import data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pharmacy.MedicineDispensingLine;
-import pharmacy.ProductSaleLine;
-import pharmacy.ProductSpecification;
-import pharmacy.Sale;
+import pharmacy.*;
 
 import java.math.BigDecimal;
 
@@ -19,8 +16,7 @@ public class ProductSaleLineBasicTest {
     @BeforeEach
     public void initProductSaleLine() throws FormatErrorException {
         Sale sale = new Sale();
-        ProductSpecification prodSpec = new ProductSpecification();
-        MedicineDispensingLine medDispensingLine = new MedicineDispensingLine(prodSpec);
+        MedicineDispensingLine medDispensingLine = new MedicineDispensingLine();
         BigDecimal price = new BigDecimal("10.0");
         PatientContr patientContr = new PatientContr(new BigDecimal("0.5"));
         productSaleLine = new ProductSaleLine(sale, medDispensingLine, price, patientContr);
