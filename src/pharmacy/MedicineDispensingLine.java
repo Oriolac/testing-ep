@@ -14,6 +14,7 @@ public class MedicineDispensingLine {
 
     public MedicineDispensingLine(ProductSpecification productSpec) {
         this.productSpec = productSpec;
+        this.acquired = false;
     }
 
     public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) throws ProductIDException, ConnectException {

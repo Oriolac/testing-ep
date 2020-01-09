@@ -20,6 +20,10 @@ public class Dispensing {
     private Sale sale;
     private DispensingTerminal dispensingTerminal;
 
+    public Dispensing() {
+
+    }
+
     public Dispensing(Date initDate, Date finalDate, HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines) {
         nOrder = (byte) hashCode();
         this.initDate = initDate;

@@ -11,6 +11,10 @@ public class ProductSaleLine {
     private ProductSpecification productSpec;
     private BigDecimal subtotal;
 
+    public ProductSaleLine() {
+
+    }
+
     public ProductSaleLine(Sale sale, MedicineDispensingLine medDispensingLine, BigDecimal price, PatientContr contr) {
         this.sale = sale;
         this.medDispensingLine = medDispensingLine;
