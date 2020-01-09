@@ -9,11 +9,10 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
-    public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) {
+    public MedicineDispensingLine(Dispensing ePrescription, ProductSpecification productSpec) {
         this.ePrescription = ePrescription;
         this.acquired = false;
-        this.productSpec = getProductSpec(productID);
-        this.productSpec.setMedDispensingLine(this);
+        this.productSpec = productSpec;
         this.productSaleLine = null;
     }
 
@@ -34,7 +33,7 @@ public class MedicineDispensingLine {
     }
 
     public ProductSpecification getProductSpec(ProductID productID) {
-        return ePrescription.getProductSpec(productID);
+        return productSpec;
     }
 
     public void setAcquired() {
