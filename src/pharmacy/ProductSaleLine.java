@@ -15,7 +15,7 @@ public class ProductSaleLine {
 
     }
 
-    public ProductSaleLine(Sale sale, MedicineDispensingLine medDispensingLine, BigDecimal price, PatientContr contr) {
+    public ProductSaleLine(Sale sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
         this.sale = sale;
         this.medDispensingLine = medDispensingLine;
         this.productSpec = medDispensingLine.getProductSpec();
