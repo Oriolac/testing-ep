@@ -7,6 +7,9 @@ import java.util.HashMap;
 public class DispensableMedicines {
     private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
 
+    public DispensableMedicines() {
+        medicineDispensingLines = new HashMap<>();
+    }
 
     public MedicineDispensingLine get(ProductID prodID) {
         return medicineDispensingLines.get(prodID);
