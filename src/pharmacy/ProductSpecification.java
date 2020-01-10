@@ -17,6 +17,10 @@ public class ProductSpecification {
         this.price = price;
     }
 
+    public ProductID getProdID() {
+        return prodID;
+    }
+
     public BigDecimal getPrice() {
         return price;
     }
