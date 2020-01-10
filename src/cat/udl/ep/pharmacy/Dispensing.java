@@ -1,6 +1,7 @@
 package cat.udl.ep.pharmacy;
 
 import cat.udl.ep.DispensingTerminal;
+import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.exceptions.DispensingNotAvailableException;
 import cat.udl.ep.services.exceptions.ProductIDException;
@@ -17,16 +18,24 @@ public class Dispensing {
     private byte nOrder; // n. of order for this dispensing inside the treatment
     private Date initDate, finalDate; // The period
     private boolean isCompleted;
-    private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
+    private DispensableMedicines medicineDispensingLines;
     private Sale sale;
     private DispensingTerminal dispensingTerminal;
 
-    public Dispensing(Date initDate, Date finalDate, HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines) {
+    public Dispensing(Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {
         nOrder = (byte) hashCode();
         this.initDate = initDate;
         this.finalDate = finalDate;
         isCompleted = false;
         this.medicineDispensingLines = medicineDispensingLines;
+    }
+
+    public Dispensing(DispensableMedicines medicineDispensingLines) {
+        this.medicineDispensingLines = medicineDispensingLines;
+    }
+
+    public Dispensing() {
+
     }
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException{
