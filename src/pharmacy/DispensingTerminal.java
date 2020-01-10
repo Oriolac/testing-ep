@@ -2,10 +2,13 @@ package pharmacy;
 
 import data.HealthCardID;
 import data.ProductID;
+import data.exceptions.HealthCardException;
+import data.exceptions.ProductIDException;
 import pharmacy.Dispensing;
 import pharmacy.ProductSpecification;
 import pharmacy.Sale;
 import pharmacy.exceptions.DispensingNotAvailableException;
+import pharmacy.exceptions.ProductNotInDispensingException;
 import pharmacy.exceptions.SaleClosedException;
 import services.HealthCardReader;
 import services.NationalHealthService;
@@ -23,10 +26,10 @@ public class DispensingTerminal {
     final static private char BY_SHEET_TREATMENT = 't';
     final static private char MANUALLY = 'm';
 
-    Sale sale;
-    Dispensing ePrescription;
-    NationalHealthService SNS;
-    HealthCardReader HCR;
+    private Sale sale;
+    private Dispensing ePrescription;
+    private NationalHealthService SNS;
+    private HealthCardReader HCR;
 
     public DispensingTerminal(NationalHealthService SNS, HealthCardReader HCR) {
         this.SNS = SNS;
@@ -54,8 +57,8 @@ public class DispensingTerminal {
         sale = new Sale(this, ePrescription);
     }
 
-    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductNotInDispensingException {
-        ProductSpecification productSpecification = SNS.getProductSpecific(pID);
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductNotInDispensingException, ProductIDException, HealthCardException {
+        ProductSpecification productSpecification = getProductSpec(pID);
         sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
         ePrescription.setProductAsDispensed(pID);
     }
@@ -83,8 +86,24 @@ public class DispensingTerminal {
         throw new NotImplementedException();
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) {
+    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
         return SNS.getProductSpecific(productID);
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public Dispensing getePrescription() {
+        return ePrescription;
+    }
+
+    public NationalHealthService getSNS() {
+        return SNS;
+    }
+
+    public HealthCardReader getHCR() {
+        return HCR;
     }
 
 }
