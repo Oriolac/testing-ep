@@ -12,16 +12,20 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
-    public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) throws ProductIDException, ConnectException {
+    public MedicineDispensingLine(Dispensing ePrescription, ProductSpecification productSpec) throws ProductIDException, ConnectException {
         this.ePrescription = ePrescription;
         this.acquired = false;
-        this.productSpec = getProductSpec(productID);
-        this.productSpec.setMedDispensingLine(this);
+        this.productSpec = productSpec;
         this.productSaleLine = null;
     }
 
     public boolean isAcquired() {
         return acquired;
+    }
+
+    public boolean equals(MedicineDispensingLine medicineDispensingLine) {
+        return ePrescription==medicineDispensingLine.getePrescription() && acquired==medicineDispensingLine.isAcquired()
+                && productSpec.equals(medicineDispensingLine.getProductSpec());
     }
 
     public ProductSpecification getProductSpec() {
