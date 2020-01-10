@@ -21,6 +21,11 @@ public class ProductSpecification {
         this.price = price;
     }
 
+    public boolean equals(ProductSpecification productSpec) {
+        return prodID.equals(productSpec.getProdID()) && description.equals(description)
+                && price.equals(productSpec.getPrice());
+    }
+
     public ProductID getProdID() {
         return prodID;
     }

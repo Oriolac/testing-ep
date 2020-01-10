@@ -22,6 +22,11 @@ public class ProductSaleLine {
         this.subtotal = price.multiply(contr.getPatCont());
     }
 
+    public boolean equals(ProductSaleLine productSaleLine) {
+        return this.sale==productSaleLine.getSale() && this.medDispensingLine.equals(productSaleLine.getMedDispensingLine())
+                && this.productSpec.equals(productSaleLine.getProductSpec()) && this.subtotal.equals(productSaleLine.getSubtotal());
+    }
+
     public ProductSpecification getProductSpec() {
         return productSpec;
     }
