@@ -1,8 +1,8 @@
-import data.HealthCardID;
-import data.exceptions.FormatErrorException;
+import cat.udl.ep.data.exceptions.FormatErrorException;
+import cat.udl.ep.services.exceptions.HealthCardException;
 import org.junit.jupiter.api.Test;
 import testInterfaces.DataClassesInterfaceTest;
-
+import cat.udl.epdata.HealthCardID
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
@@ -17,7 +17,7 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
 
     @Override
     @Test
-    public void getValueTest() throws FormatErrorException {
+    public void getValueTest() throws FormatErrorException, HealthCardException {
         healthCardId = new HealthCardID("IBMI473298320193");
         String code = "IBMI473298320193";
         assertTrue(healthCardId.getPersonalID().equals(code));
@@ -25,7 +25,7 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
 
     @Override
     @Test
-    public void equalsTest() throws FormatErrorException {
+    public void equalsTest() throws FormatErrorException, HealthCardException {
         HealthCardID healthCardId1, healthCardId2;
         healthCardId1 = new HealthCardID("IBMI473298320193");
         healthCardId2 = new HealthCardID("IBMI473298320193");
@@ -34,7 +34,7 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
 
     @Override
     @Test
-    public void notEqualsTest() throws FormatErrorException {
+    public void notEqualsTest() throws FormatErrorException, HealthCardException {
         HealthCardID healthCardId1, healthCardId2;
         healthCardId1 = new HealthCardID("IBMI473298320193");
         healthCardId2 = new HealthCardID("ZZZZ473298320193");

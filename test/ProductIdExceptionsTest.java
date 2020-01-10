@@ -1,5 +1,5 @@
-import data.ProductID;
-import data.exceptions.FormatErrorException;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.Test;
 import testInterfaces.DataClassesInterfaceTest;
 
