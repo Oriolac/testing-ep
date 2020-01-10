@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class SaleTest {
 
     private Sale sale;
@@ -30,10 +32,14 @@ public class SaleTest {
     @Test
     public void addLineTest() throws ProductIDException, FormatErrorException, SaleClosedException, ProductNotInDispensingException {
         ProductID prod1 = new ProductID("111111111111");
-        sale.addLine(prod1, new BigDecimal("9.99"), new PatientContr(new BigDecimal("0.5")));
-        List<ProductSaleLine> obtProductSaleLines = sale.getProductSaleLines();
-        ProductSaleLine expProdSaleLine = new ProductSaleLine(sale, sale.getProductSpec(prod1));
-        List<ProductSaleLine> expProductSaleLines = new ArrayList<>().add();
+        BigDecimal price = new BigDecimal("9.99");
+        PatientContr contr = new PatientContr(new BigDecimal("0.5"));
+        sale.addLine(prod1, price, contr);
+        ProductSaleLine expProdSaleLine = new ProductSaleLine(sale, sale.getProductSpec(prod1), price, contr);
+        List<ProductSaleLine> expProductSaleLines = new ArrayList<>();
+        expProductSaleLines.add(expProdSaleLine);
+
+        assertTrue(expProductSaleLines.equals(sale.getProductSaleLines()));
 
     }
 
