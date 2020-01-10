@@ -1,7 +1,6 @@
-package data;
+package cat.udl.ep.data;
 
-import data.exceptions.FormatErrorException;
-import data.exceptions.ProductIDException;
+import cat.udl.ep.services.exceptions.ProductIDException;
 
 final public class ProductID {
     private final String productCode;

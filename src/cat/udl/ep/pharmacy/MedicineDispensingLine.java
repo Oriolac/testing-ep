@@ -1,7 +1,7 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
 
-import data.ProductID;
+import ep.data.ProductID;
 
 public class MedicineDispensingLine {
     private boolean acquired;

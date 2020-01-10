@@ -1,8 +1,9 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
-import data.PatientContr;
-import data.ProductID;
-import pharmacy.exceptions.SaleClosedException;
+import cat.udl.ep.DispensingTerminal;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Sale {
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> productSaleLines;
     private final Dispensing ePrescription;
-    private DispensingTerminal dispensingTerminal;
+    private final DispensingTerminal dispensingTerminal;
 
     public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
@@ -92,8 +93,6 @@ public class Sale {
 
     public Dispensing getePrescription() { return ePrescription; }
 
-    public DispensingTerminal getDispensingTerminal() {
-        return dispensingTerminal;
-    }
+    public DispensingTerminal getDispensingTerminal() { return dispensingTerminal; }
 
 }

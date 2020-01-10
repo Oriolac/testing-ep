@@ -1,22 +1,20 @@
-package pharmacy;
+package cat.udl.ep;
 
-import data.HealthCardID;
-import data.ProductID;
-import data.exceptions.HealthCardException;
-import data.exceptions.ProductIDException;
-import pharmacy.Dispensing;
-import pharmacy.ProductSpecification;
-import pharmacy.Sale;
-import pharmacy.exceptions.DispensingNotAvailableException;
-import pharmacy.exceptions.NotValidePrescriptionException;
-import pharmacy.exceptions.PatientIDException;
-import pharmacy.exceptions.SaleClosedException;
-import services.HealthCardReader;
-import services.NationalHealthService;
-import services.exceptions.QuantityMinorThanImport;
-import services.exceptions.SaleNotClosedException;
-import services.exceptions.SaleNotInitiatedException;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.services.exceptions.HealthCardException;
+import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.pharmacy.Dispensing;
+import cat.udl.ep.pharmacy.ProductSpecification;
+import cat.udl.ep.pharmacy.Sale;
+import cat.udl.ep.pharmacy.exceptions.DispensingNotAvailableException;
+import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
+import cat.udl.ep.pharmacy.exceptions.PatientIDException;
+import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
+import cat.udl.ep.services.HealthCardReader;
+import cat.udl.ep.services.NationalHealthService;
+import cat.udl.ep.services.exceptions.QuantityMinorThanImport;
+import cat.udl.ep.services.exceptions.SaleNotClosedException;
+import cat.udl.ep.services.exceptions.SaleNotInitiatedException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
@@ -41,7 +39,6 @@ public class DispensingTerminal {
         switch (option){
             case BY_HEALTHCARD:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
-                ePrescription.setDispensingTerminal(this);
                 break;
             case BY_SHEET_TREATMENT:
                 break;

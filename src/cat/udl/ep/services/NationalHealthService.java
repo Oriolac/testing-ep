@@ -1,17 +1,17 @@
-package services;
+package cat.udl.ep.services;
 
 /**
  * External service for managing and storing ePrescriptions from population
  */
 
-import data.HealthCardID;
-import data.PatientContr;
-import data.ProductID;
-import data.exceptions.ProductIDException;
-import pharmacy.Dispensing;
-import pharmacy.ProductSpecification;
-import data.exceptions.HealthCardException;
-import pharmacy.exceptions.NotValidePrescriptionException;
+import cat.udl.ep.data.HealthCardID;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.pharmacy.Dispensing;
+import cat.udl.ep.pharmacy.ProductSpecification;
+import cat.udl.ep.services.exceptions.HealthCardException;
+import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
 
 import java.net.ConnectException;
 import java.util.List;

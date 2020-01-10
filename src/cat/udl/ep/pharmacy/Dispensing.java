@@ -1,7 +1,11 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
-import data.ProductID;
-import pharmacy.exceptions.DispensingNotAvailableException;
+import cat.udl.ep.DispensingTerminal;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.DispensingNotAvailableException;
+import cat.udl.ep.services.exceptions.ProductIDException;
+
+import java.net.ConnectException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,7 +33,7 @@ public class Dispensing {
         if(Date.from(Instant.now()).after(getInitDate())) {
             return true;
         } else {
-            throw new DispensingNotAvailableException("Dispensació no disponible a la data d'avui.");
+            throw new DispensingNotAvailableException("Dispensació no disponible a la cat.udl.ep.data d'avui.");
         }
     }
 
@@ -43,8 +47,8 @@ public class Dispensing {
         return initDate;
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) {
-        return dispensingTerminal.getProductSpec(productID);
+    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
+        return sale.getDispensingTerminal().getProductSpec(productID);
     }
 
     public Date getFinalDate() {
@@ -59,9 +63,6 @@ public class Dispensing {
         isCompleted = true;
     }
 
-    public void setDispensingTerminal(DispensingTerminal dispensingTerminal) {
-        this.dispensingTerminal = dispensingTerminal;
-    }
 
     public void setSale(Sale sale) {
         this.sale = sale;

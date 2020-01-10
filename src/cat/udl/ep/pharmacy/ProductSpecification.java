@@ -1,6 +1,6 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
-import data.ProductID;
+import cat.udl.ep.data.ProductID;
 
 import java.math.BigDecimal;
 
