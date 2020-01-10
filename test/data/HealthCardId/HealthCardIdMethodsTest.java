@@ -2,12 +2,13 @@ package data.HealthCardId;
 
 import data.HealthCardID;
 import data.exceptions.HealthCardException;
+import data.testInterfaces.DataMethodsTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-public class HealthCardIdMethodsTest {
+public class HealthCardIdMethodsTest implements DataMethodsTest {
 
     private HealthCardID healthCardId1;
     private String code = "IBMI473298320193";

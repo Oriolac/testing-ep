@@ -2,13 +2,12 @@ package data.HealthCardId;
 
 import data.HealthCardID;
 import data.exceptions.HealthCardException;
-import data.testInterfaces.DataClassesInterfaceTest;
+import data.testInterfaces.DataExceptionsTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
-
+public class HealthCardIdExceptionsTest implements DataExceptionsTest {
 
 
     @Override
