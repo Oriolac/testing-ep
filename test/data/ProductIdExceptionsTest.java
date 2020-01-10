@@ -1,8 +1,7 @@
-package data_tests;
+package data;
 
-import data.ProductID;
 import data.exceptions.ProductIDException;
-import data_tests.testInterfaces.DataClassesInterfaceTest;
+import data.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

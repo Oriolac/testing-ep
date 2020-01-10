@@ -1,8 +1,8 @@
-package data_tests;
+package data.HealthCardId;
 
 import data.HealthCardID;
 import data.exceptions.HealthCardException;
-import data_tests.testInterfaces.DataClassesInterfaceTest;
+import data.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +13,7 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
     @Override
     @Test
     public void nullConstructorParameterTest() {
-        Throwable exception = assertThrows(NullPointerException.class,
+        assertThrows(NullPointerException.class,
                 () -> healthCardId = new HealthCardID(null));
     }
 
