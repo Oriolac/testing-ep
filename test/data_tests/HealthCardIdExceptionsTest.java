@@ -1,7 +1,9 @@
+package data_tests;
+
 import data.HealthCardID;
-import data.exceptions.FormatErrorException;
+import data.exceptions.HealthCardException;
+import data_tests.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
-import testInterfaces.DataClassesInterfaceTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,26 +17,23 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
                 () -> healthCardId = new HealthCardID(null));
     }
 
-    @Override
     @Test
-    public void getValueTest() throws FormatErrorException {
+    public void getValueTest() throws HealthCardException {
         healthCardId = new HealthCardID("IBMI473298320193");
         String code = "IBMI473298320193";
         assertTrue(healthCardId.getPersonalID().equals(code));
     }
 
-    @Override
     @Test
-    public void equalsTest() throws FormatErrorException {
+    public void equalsTest() throws HealthCardException {
         HealthCardID healthCardId1, healthCardId2;
         healthCardId1 = new HealthCardID("IBMI473298320193");
         healthCardId2 = new HealthCardID("IBMI473298320193");
         assertTrue(healthCardId1.equals(healthCardId2));
     }
 
-    @Override
     @Test
-    public void notEqualsTest() throws FormatErrorException {
+    public void notEqualsTest() throws HealthCardException {
         HealthCardID healthCardId1, healthCardId2;
         healthCardId1 = new HealthCardID("IBMI473298320193");
         healthCardId2 = new HealthCardID("ZZZZ473298320193");
@@ -46,12 +45,12 @@ public class HealthCardIdExceptionsTest implements DataClassesInterfaceTest {
 
     @Override
     @Test
-    public void formatErrorExceptionTest() {
-        Throwable exception = assertThrows(FormatErrorException.class,
+    public void dataErrorExceptionTest() {
+        Throwable exception = assertThrows(HealthCardException.class,
                 () -> healthCardId = new HealthCardID("IBMI47329832019"));
-        exception = assertThrows(FormatErrorException.class,
+        exception = assertThrows(HealthCardException.class,
                 () -> healthCardId = new HealthCardID("B325897653492301"));
-        exception = assertThrows(FormatErrorException.class,
+        exception = assertThrows(HealthCardException.class,
                 () -> healthCardId = new HealthCardID("BINO89765Z492301"));
     }
 

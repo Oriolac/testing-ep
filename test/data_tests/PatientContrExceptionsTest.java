@@ -1,7 +1,9 @@
+package data_tests;
+
 import data.PatientContr;
 import data.exceptions.FormatErrorException;
+import data_tests.testInterfaces.DataClassesInterfaceTest;
 import org.junit.jupiter.api.Test;
-import testInterfaces.DataClassesInterfaceTest;
 
 import java.math.BigDecimal;
 
@@ -17,7 +19,6 @@ public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
                 () -> patientContr = new PatientContr(null));
     }
 
-    @Override
     @Test
     public void getValueTest() throws FormatErrorException {
         patientContr = new PatientContr(new BigDecimal("50.0"));
@@ -25,7 +26,6 @@ public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
         assertTrue(patientContr.getPatCont().compareTo(contribution) == 0);
     }
 
-    @Override
     @Test
     public void equalsTest() throws FormatErrorException {
         PatientContr patientContr1, patientContr2;
@@ -34,7 +34,6 @@ public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
         assertTrue(patientContr1.equals(patientContr2));
     }
 
-    @Override
     @Test
     public void notEqualsTest() throws FormatErrorException {
         PatientContr patientContr1, patientContr2;
@@ -48,7 +47,7 @@ public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
 
     @Override
     @Test
-    public void formatErrorExceptionTest() {
+    public void dataErrorExceptionTest() {
         Throwable exception = assertThrows(FormatErrorException.class,
                 () -> patientContr = new PatientContr(new BigDecimal("-20.0")));
         exception = assertThrows(FormatErrorException.class,

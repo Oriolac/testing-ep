@@ -29,6 +29,10 @@ public class DispensingTerminal {
     private NationalHealthService SNS;
     private HealthCardReader HCR;
 
+    public DispensingTerminal() {
+
+    }
+
     public DispensingTerminal(NationalHealthService SNS, HealthCardReader HCR) {
         this.SNS = SNS;
         this.HCR = HCR;
