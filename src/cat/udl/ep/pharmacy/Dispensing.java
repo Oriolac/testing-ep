@@ -57,7 +57,7 @@ public class Dispensing {
     }
 
     public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
-        return sale.getDispensingTerminal().getProductSpec(productID);
+        return medicineDispensingLines.get(productID).getProductSpec();
     }
 
     public Date getFinalDate() {
@@ -66,6 +66,10 @@ public class Dispensing {
 
     public MedicineDispensingLine getMedicineDispensingLine(ProductID productID) {
         return medicineDispensingLines.get(productID);
+    }
+
+    public DispensableMedicines getDispensableMedicines() {
+        return medicineDispensingLines;
     }
 
     public void setCompleted() {
@@ -79,5 +83,6 @@ public class Dispensing {
     }
 
     public void setDispensingTerminal(DispensingTerminal dispensingTerminal) {
+        this.dispensingTerminal = dispensingTerminal;
     }
 }
