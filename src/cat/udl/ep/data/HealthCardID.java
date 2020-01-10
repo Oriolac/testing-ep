@@ -1,4 +1,4 @@
-package cat.udl.epdata;
+package cat.udl.ep.data;
 
 import cat.udl.ep.services.exceptions.HealthCardException;
 
