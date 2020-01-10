@@ -1,17 +1,17 @@
-package pharmacy_tests;
+package pharmacy;
 
-import data.ProductID;
-import data.exceptions.ProductIDException;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.ProductSpecification;
+import cat.udl.ep.services.exceptions.ProductIDException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pharmacy.ProductSpecification;
 
 import java.math.BigDecimal;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ProductSpecificationTest {
+
     private ProductSpecification productSpecification;
 
     @BeforeEach
@@ -27,7 +27,7 @@ public class ProductSpecificationTest {
         BigDecimal exp_price = new BigDecimal("5.0");
         BigDecimal obt_price = productSpecification.getPrice();
         BigDecimal n_exp_price = new BigDecimal("2.0");
-        assertTrue(exp_price.compareTo(obt_price) == 0);
+        assertEquals(0, exp_price.compareTo(obt_price));
         assertTrue(n_exp_price.compareTo(obt_price) < 0);
     }
 
@@ -36,7 +36,7 @@ public class ProductSpecificationTest {
         String exp_descr = "Medicament pel mal de cap.";
         String obt_descr = productSpecification.getDescription();
         String n_exp_descr = "Medicament pel mal de coll.";
-        assertTrue(exp_descr.equals(obt_descr));
-        assertFalse(n_exp_descr.equals(obt_descr));
+        assertEquals(exp_descr, obt_descr);
+        assertNotEquals(n_exp_descr, obt_descr);
     }
 }

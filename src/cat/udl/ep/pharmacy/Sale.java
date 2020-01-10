@@ -33,6 +33,7 @@ public class Sale {
         this.dispensingTerminal = dispensingTerminal;
     }
 
+
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         if (!isClosed()) {
             // TODO: Comprovar que el producte és un dels dispensables

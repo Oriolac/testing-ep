@@ -39,11 +39,7 @@ final public class PatientContr {
     }
 
     private boolean isValidContr(BigDecimal contribution) {
-        if (contribution.compareTo(new BigDecimal("0.0")) == -1 ||
-            contribution.compareTo(new BigDecimal("100.0")) == 1) {
-            return false;
-        }
-
-        return true;
+        return contribution.compareTo(new BigDecimal("0.0")) >= 0 &&
+                contribution.compareTo(new BigDecimal("100.0")) <= 0;
     }
 }

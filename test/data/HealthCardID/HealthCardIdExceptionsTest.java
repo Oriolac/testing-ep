@@ -1,13 +1,14 @@
 package data.HealthCardID;
 
-import data.HealthCardID;
-import data.exceptions.HealthCardException;
+import cat.udl.ep.data.HealthCardID;
+import cat.udl.ep.services.exceptions.HealthCardException;
 import data.testInterfaces.DataExceptionsTest;
+import data.testInterfaces.NullInterfaceTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class HealthCardIdExceptionsTest implements DataExceptionsTest {
+public class HealthCardIdExceptionsTest implements DataExceptionsTest, NullInterfaceTest {
 
 
     @Override
@@ -28,4 +29,9 @@ public class HealthCardIdExceptionsTest implements DataExceptionsTest {
                 () -> new HealthCardID("BINO89765Z492301"));
     }
 
+    @Override
+    public void nullEqualsParameterTest() throws HealthCardException {
+        HealthCardID healthCardID = new HealthCardID("IBMI473298320192");
+        assertNotEquals(null, healthCardID);
+    }
 }

@@ -1,6 +1,6 @@
-package data;
+package cat.udl.ep.data;
 
-import pharmacy.MedicineDispensingLine;
+import cat.udl.ep.pharmacy.MedicineDispensingLine;
 
 import java.util.HashMap;
 

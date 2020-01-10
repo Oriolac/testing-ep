@@ -1,13 +1,14 @@
+package data.PatientContr;
 
-import data.PatientContr;
-import data.exceptions.FormatErrorException;
-import data.exceptions.HealthCardException;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.exceptions.FormatErrorException;
 import data.testInterfaces.DataMethodsTest;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class PatientContrMethodsTest implements DataMethodsTest {
 
@@ -37,5 +38,14 @@ public class PatientContrMethodsTest implements DataMethodsTest {
         assertNotEquals(patientContr1, patientContr2);
         assertNotEquals(null, patientContr1);
         assertNotEquals("70.0", patientContr1);
+    }
+
+    @Override
+    @Test
+    public void formatErrorExceptionTest() {
+        assertThrows(FormatErrorException.class,
+                () -> patientContr = new PatientContr(new BigDecimal("-20.0")));
+        assertThrows(FormatErrorException.class,
+                () -> patientContr = new PatientContr(new BigDecimal("105.0")));
     }
 }

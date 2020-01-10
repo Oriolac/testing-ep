@@ -1,30 +1,38 @@
 package data.PatientContr;
 
-import data.exceptions.FormatErrorException;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.exceptions.FormatErrorException;
+import cat.udl.ep.services.exceptions.HealthCardException;
 import data.testInterfaces.DataExceptionsTest;
+import data.testInterfaces.NullInterfaceTest;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PatientContrExceptionsTest implements DataExceptionsTest {
+public class PatientContrExceptionsTest implements DataExceptionsTest, NullInterfaceTest {
     private PatientContr patientContr;
 
     @Override
     @Test
     public void nullConstructorParameterTest() {
-        Throwable exception = assertThrows(NullPointerException.class,
-                () -> patientContr = new PatientContr(null));
+        assertThrows(NullPointerException.class,
+                () -> new PatientContr(null));
     }
 
     @Override
     @Test
     public void dataErrorExceptionTest() {
-        Throwable exception = assertThrows(FormatErrorException.class,
-                () -> patientContr = new PatientContr(new BigDecimal("-20.0")));
-        exception = assertThrows(FormatErrorException.class,
-                () -> patientContr = new PatientContr(new BigDecimal("105.0")));
+        assertThrows(FormatErrorException.class,
+                () -> new PatientContr(new BigDecimal("-20.0")));
+        assertThrows(FormatErrorException.class,
+                () -> new PatientContr(new BigDecimal("105.0")));
     }
 
+    @Override
+    public void nullEqualsParameterTest() throws FormatErrorException {
+        PatientContr patientContr = new PatientContr(BigDecimal.ONE);
+        assertNotEquals(null, patientContr);
+    }
 }

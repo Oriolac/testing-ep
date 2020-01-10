@@ -69,4 +69,6 @@ public class Dispensing {
         this.sale = sale;
     }
 
+    public void setDispensingTerminal(DispensingTerminal dispensingTerminal) {
+    }
 }

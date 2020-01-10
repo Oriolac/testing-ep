@@ -1,12 +1,9 @@
 package data.testInterfaces;
 
-import data.HealthCardID;
-import data.exceptions.FormatErrorException;
-import data.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.FormatErrorException;
+import cat.udl.ep.services.exceptions.HealthCardException;
+import cat.udl.ep.services.exceptions.ProductIDException;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 public interface DataMethodsTest {
 
@@ -14,8 +11,11 @@ public interface DataMethodsTest {
     void getValueTest() throws HealthCardException, FormatErrorException;
 
     @Test
-    void equalsTest() throws HealthCardException, FormatErrorException;
+    void equalsTest() throws HealthCardException, FormatErrorException, ProductIDException;
 
     @Test
-    void notEqualsTest() throws HealthCardException, FormatErrorException;
+    void notEqualsTest() throws HealthCardException, FormatErrorException, ProductIDException;
+
+    @Test
+    void formatErrorExceptionTest();
 }
