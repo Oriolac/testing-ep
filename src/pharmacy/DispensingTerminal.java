@@ -7,9 +7,7 @@ import data.exceptions.ProductIDException;
 import pharmacy.Dispensing;
 import pharmacy.ProductSpecification;
 import pharmacy.Sale;
-import pharmacy.exceptions.DispensingNotAvailableException;
-import pharmacy.exceptions.ProductNotInDispensingException;
-import pharmacy.exceptions.SaleClosedException;
+import pharmacy.exceptions.*;
 import services.HealthCardReader;
 import services.NationalHealthService;
 import services.exceptions.QuantityMinorThanImport;
@@ -36,7 +34,7 @@ public class DispensingTerminal {
         this.HCR = HCR;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidPrescriptionException, ConnectException, PatientIDException {
+    public void getePrescription(char option) throws HealthCardException, NotValidPrescriptionException, ConnectException, PatientIDException, NotValidePrescriptionException {
         switch (option){
             case BY_HEALTHCARD:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
