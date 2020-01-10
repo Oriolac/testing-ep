@@ -11,10 +11,18 @@ public class ProductSpecification {
     private MedicineDispensingLine medDispensingLine;
     private ProductSaleLine prodSaleLine;
 
+    public ProductSpecification() {
+
+    }
+
     public ProductSpecification(ProductID productID, String description, BigDecimal price) {
         this.prodID = productID;
         this.description = description;
         this.price = price;
+    }
+
+    public boolean equals(ProductSpecification productSpec) {
+        return prodID.equals(productSpec.getProdID()) && description==productSpec.description && price.equals(productSpec.getPrice());
     }
 
     public BigDecimal getPrice() {
