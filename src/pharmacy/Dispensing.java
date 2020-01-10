@@ -1,10 +1,7 @@
 package pharmacy;
 
 import data.ProductID;
-import data.exceptions.ProductIDException;
 import pharmacy.exceptions.DispensingNotAvailableException;
-
-import java.net.ConnectException;
 import java.time.Instant;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,8 +47,8 @@ public class Dispensing {
         return initDate;
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
-        return dispensingTerminal.getProductSpec(productID);
+    public ProductSpecification getProductSpec(ProductID productID) {
+        return medicineDispensingLines.get(productID).getProductSpec();
     }
 
     public Date getFinalDate() {
