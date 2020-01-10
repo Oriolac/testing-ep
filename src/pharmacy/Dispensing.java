@@ -55,6 +55,10 @@ public class Dispensing {
         return medicineDispensingLines.get(productID);
     }
 
+    public HashMap<ProductID, MedicineDispensingLine> getMedicineDispensingLines() {
+        return medicineDispensingLines;
+    }
+
     public void setCompleted() {
         isCompleted = true;
     }
