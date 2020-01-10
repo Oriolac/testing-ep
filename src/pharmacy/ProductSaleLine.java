@@ -13,7 +13,7 @@ public class ProductSaleLine {
 
     public ProductSaleLine(Sale sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
         this.sale = sale;
-        this.medDispensingLine = medDispensingLine;
+        this.medDispensingLine = sale.getePrescription().getMedicineDispensingLine(productSpec.getProdID());
         this.productSpec = productSpec;
         this.subtotal = price.multiply(contr.getPatCont());
     }
