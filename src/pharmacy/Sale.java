@@ -41,6 +41,7 @@ public class Sale {
         if (!isClosed()) {
             if (isDispensable(prodID)) {
                 ProductSaleLine prodSaleLine = new ProductSaleLine(this, getProductSpec(prodID), price, contr);
+                ePrescription.getMedicineDispensingLine(prodID).setProductSaleLine(prodSaleLine);
                 productSaleLines.add(prodSaleLine);
             } else {
                 throw new ProductNotInDispensingException("El producte no és un dels dispensables per la eRecepta.");

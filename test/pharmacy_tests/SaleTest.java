@@ -20,12 +20,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class SaleTest {
 
     private Sale sale;
+    private Dispensing ePrescription;
 
     @BeforeEach
     public void initSale() throws ProductIDException {
         DispensingTerminal dispensingTerminal = new DispensingTerminal();
         DispensableMedicines dispensableMedicines = initDispensableMedicines(dispensingTerminal);
-        Dispensing ePrescription = new Dispensing(dispensableMedicines);
+        ePrescription = new Dispensing(dispensableMedicines);
         sale = new Sale(dispensingTerminal, ePrescription);
     }
 
@@ -39,15 +40,31 @@ public class SaleTest {
         List<ProductSaleLine> expProductSaleLines = new ArrayList<>();
         expProductSaleLines.add(expProdSaleLine);
 
-        assertTrue(expProductSaleLines.equals(sale.getProductSaleLines()));
+        assertTrue(equals(expProductSaleLines, sale.getProductSaleLines()));
 
+    }
+
+    private boolean equals(List<ProductSaleLine> productSaleLines1, List<ProductSaleLine> productSaleLines2) {
+        if (productSaleLines1.size() != productSaleLines2.size()) {
+            return false;
+        } else {
+            for (int i = 0; i<productSaleLines1.size(); i++) {
+                if (productSaleLines1.get(i).equals(productSaleLines2.get(i)) == false ) {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     private DispensableMedicines initDispensableMedicines(DispensingTerminal dt) throws ProductIDException {
         DispensableMedicines dispensableMedicines = new DispensableMedicines();
-        dispensableMedicines.put(new ProductID("111111111111"), new MedicineDispensingLine());
-        dispensableMedicines.put(new ProductID("222222222222"), new MedicineDispensingLine());
-        dispensableMedicines.put(new ProductID("333333333333"), new MedicineDispensingLine());
+        ProductID prod1 = new ProductID("111111111111");
+
+        ProductSpecification prodSpec1 = new ProductSpecification(prod1, "prod1" ,new BigDecimal("9.99"));
+
+        dispensableMedicines.put(prod1, new MedicineDispensingLine(ePrescription, prodSpec1));
+
         return dispensableMedicines;
     }
 }
