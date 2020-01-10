@@ -62,7 +62,7 @@ public class Sale {
     }
 
     private boolean isDispensable(ProductID prodId) {
-        return ePrescription.getMedicineDispensingLines().containsKey(prodId);
+        return ePrescription.getDispensableMedicines().contains(prodId);
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
