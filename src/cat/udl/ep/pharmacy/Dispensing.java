@@ -63,6 +63,7 @@ public class Dispensing {
         isCompleted = true;
     }
 
+    public boolean isCompleted() { return isCompleted; }
 
     public void setSale(Sale sale) {
         this.sale = sale;
