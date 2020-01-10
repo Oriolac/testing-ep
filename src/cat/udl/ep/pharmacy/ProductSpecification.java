@@ -32,4 +32,8 @@ public class ProductSpecification {
     public void setProdSaleLine(ProductSaleLine prodSaleLine) {
         this.prodSaleLine = prodSaleLine;
     }
+
+    public ProductID getProdID() {
+        return prodID;
+    }
 }
