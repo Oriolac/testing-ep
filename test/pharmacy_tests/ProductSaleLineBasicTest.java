@@ -16,10 +16,10 @@ public class ProductSaleLineBasicTest {
     @BeforeEach
     public void initProductSaleLine() throws FormatErrorException {
         Sale sale = new Sale();
-        MedicineDispensingLine medDispensingLine = new MedicineDispensingLine();
+        ProductSpecification prodSpec = new ProductSpecification();
         BigDecimal price = new BigDecimal("10.0");
         PatientContr patientContr = new PatientContr(new BigDecimal("0.5"));
-        productSaleLine = new ProductSaleLine(sale, medDispensingLine, price, patientContr);
+        productSaleLine = new ProductSaleLine(sale, prodSpec, price, patientContr);
     }
 
     @Test
