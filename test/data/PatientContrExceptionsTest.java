@@ -1,14 +1,14 @@
 package data;
 
 import data.exceptions.FormatErrorException;
-import data.testInterfaces.DataClassesInterfaceTest;
+import data.testInterfaces.DataExceptionsTest;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PatientContrExceptionsTest implements DataClassesInterfaceTest {
+public class PatientContrExceptionsTest implements DataExceptionsTest {
     private PatientContr patientContr;
 
     @Override

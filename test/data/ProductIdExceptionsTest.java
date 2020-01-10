@@ -1,13 +1,13 @@
 package data;
 
 import data.exceptions.ProductIDException;
-import data.testInterfaces.DataClassesInterfaceTest;
+import data.testInterfaces.DataExceptionsTest;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ProductIdExceptionsTest implements DataClassesInterfaceTest {
+public class ProductIdExceptionsTest implements DataExceptionsTest {
     private ProductID productID;
 
     @Override
