@@ -5,8 +5,10 @@ import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.exceptions.ProductNotInDispensingException;
 import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
+import cat.udl.ep.services.exceptions.ProductIDException;
 
 import java.math.BigDecimal;
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +24,7 @@ public class Sale {
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> productSaleLines;
     private final Dispensing ePrescription;
-    private final DispensingTerminal dispensingTerminal;
+    private DispensingTerminal dispensingTerminal;
 
     public Sale() {
         ePrescription = null;
@@ -38,7 +40,7 @@ public class Sale {
         this.dispensingTerminal = dispensingTerminal;
     }
 
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException, ProductIDException, ConnectException {
         if (!isClosed()) {
             if (isDispensable(prodID)) {
                 MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
@@ -65,6 +67,10 @@ public class Sale {
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
+    }
+
+    public boolean isDispensable(ProductID productID) {
+        return ePrescription.getDispensableMedicines().contains(productID);
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
@@ -102,5 +108,9 @@ public class Sale {
     public Dispensing getePrescription() { return ePrescription; }
 
     public DispensingTerminal getDispensingTerminal() { return dispensingTerminal; }
+
+    public ProductSpecification getProductSpec(ProductID prodID) throws ProductIDException, ConnectException {
+        return ePrescription.getProductSpec(prodID);
+    }
 
 }
