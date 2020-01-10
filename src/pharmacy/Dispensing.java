@@ -18,6 +18,14 @@ public class Dispensing {
     private Sale sale;
     private DispensingTerminal dispensingTerminal;
 
+    public Dispensing(DispensableMedicines medicineDispensingLines) {
+        this.medicineDispensingLines = medicineDispensingLines;
+    }
+
+    public Dispensing() {
+
+    }
+
     public Dispensing(Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {
         nOrder = (byte) hashCode();
         this.initDate = initDate;
