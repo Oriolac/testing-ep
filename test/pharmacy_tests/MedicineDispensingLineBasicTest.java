@@ -1,5 +1,6 @@
 package pharmacy_tests;
 
+import data.DispensableMedicines;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pharmacy.Dispensing;
@@ -15,8 +16,13 @@ public class MedicineDispensingLineBasicTest {
     @BeforeEach
     public void initMedDispensingLine() {
         ProductSpecification prodSpec = new ProductSpecification();
-        Dispensing ePrescription = new Dispensing();
+        DispensableMedicines dispensableMedicines = initDispensableMedicines();
+        Dispensing ePrescription = new Dispensing(dispensableMedicines);
         medDispensingLine = new MedicineDispensingLine(ePrescription, prodSpec);
+    }
+
+    private DispensableMedicines initDispensableMedicines() {
+        DispensableMedicines dispensableMedicines =
     }
 
     @Test
