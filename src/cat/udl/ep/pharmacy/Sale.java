@@ -3,6 +3,7 @@ package cat.udl.ep.pharmacy;
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.ProductNotInDispensingException;
 import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
@@ -23,6 +24,10 @@ public class Sale {
     private final Dispensing ePrescription;
     private final DispensingTerminal dispensingTerminal;
 
+    public Sale() {
+        ePrescription = null;
+    }
+
     public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
         date = new Date();
@@ -33,13 +38,15 @@ public class Sale {
         this.dispensingTerminal = dispensingTerminal;
     }
 
-
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
         if (!isClosed()) {
-            // TODO: Comprovar que el producte és un dels dispensables
-            MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
-            ProductSaleLine prodSaleLine = new ProductSaleLine(this, medDispensingLine, price, contr);
-            productSaleLines.add(prodSaleLine);
+            if (isDispensable(prodID)) {
+                MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
+                ProductSaleLine prodSaleLine = new ProductSaleLine(this, getProductSpec(prodID), price, contr);
+                productSaleLines.add(prodSaleLine);
+            } else {
+                throw new ProductNotInDispensingException("El producte no és un dels dispensables");
+            }
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
