@@ -32,12 +32,15 @@ public class Sale {
         this.dispensingTerminal = dispensingTerminal;
     }
 
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
         if (!isClosed()) {
-            // TODO: Comprovar que el producte és un dels dispensables
-            MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
-            ProductSaleLine prodSaleLine = new ProductSaleLine(this, ePrescription.getProductSpec(prodID), price, contr);
-            productSaleLines.add(prodSaleLine);
+            if (isDispensable(prodID)) {
+                MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
+                ProductSaleLine prodSaleLine = new ProductSaleLine(this, ePrescription.getProductSpec(prodID), price, contr);
+                productSaleLines.add(prodSaleLine);
+            } else {
+                throw new ProductNotInDispensingException("El producte no és un dels dispensables per la eRecepta.");
+            }
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
@@ -56,6 +59,10 @@ public class Sale {
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
+    }
+
+    private boolean isDispensable(ProductID prodId) {
+        return ePrescription.getMedicineDispensingLines().containsKey(prodId);
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
