@@ -2,6 +2,7 @@ package pharmacy;
 
 import data.PatientContr;
 import data.ProductID;
+import pharmacy.exceptions.ProductNotInDispensingException;
 import pharmacy.exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
