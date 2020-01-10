@@ -15,7 +15,6 @@ public class MedicineDispensingLineBasicTest {
     @BeforeEach
     public void initMedDispensingLine() {
         ProductSpecification prodSpec = new ProductSpecification();
-        ProductSaleLine prodSaleLine = new ProductSaleLine();
         Dispensing ePrescription = new Dispensing();
         medDispensingLine = new MedicineDispensingLine(ePrescription, prodSpec);
     }
