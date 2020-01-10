@@ -24,6 +24,11 @@ public class MedicineDispensingLine {
         return acquired;
     }
 
+    public boolean equals(MedicineDispensingLine medicineDispensingLine) {
+        return ePrescription==medicineDispensingLine.getePrescription() && acquired==medicineDispensingLine.isAcquired()
+                && productSpec.equals(medicineDispensingLine.getProductSpec()) && productSaleLine.equals(productSaleLine);
+    }
+
     public ProductSpecification getProductSpec() {
         return productSpec;
     }
