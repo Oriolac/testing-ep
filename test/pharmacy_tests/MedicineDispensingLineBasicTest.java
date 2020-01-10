@@ -16,14 +16,10 @@ public class MedicineDispensingLineBasicTest {
     @BeforeEach
     public void initMedDispensingLine() {
         ProductSpecification prodSpec = new ProductSpecification();
-        DispensableMedicines dispensableMedicines = initDispensableMedicines();
-        Dispensing ePrescription = new Dispensing(dispensableMedicines);
+        Dispensing ePrescription = new Dispensing();
         medDispensingLine = new MedicineDispensingLine(ePrescription, prodSpec);
     }
 
-    private DispensableMedicines initDispensableMedicines() {
-        DispensableMedicines dispensableMedicines =
-    }
 
     @Test
     public void isAcquiredTest() {
