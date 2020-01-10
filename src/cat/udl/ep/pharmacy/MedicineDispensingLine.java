@@ -1,7 +1,7 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
 
-import data.ProductID;
+import ep.data.ProductID;
 
 public class MedicineDispensingLine {
     private boolean acquired;
@@ -9,24 +9,16 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
-    public MedicineDispensingLine() {
-
-    }
-
-    public MedicineDispensingLine(Dispensing ePrescription, ProductSpecification productSpec) {
+    public MedicineDispensingLine(Dispensing ePrescription, ProductID productID) {
         this.ePrescription = ePrescription;
         this.acquired = false;
-        this.productSpec = productSpec;
+        this.productSpec = getProductSpec(productID);
+        this.productSpec.setMedDispensingLine(this);
         this.productSaleLine = null;
     }
 
     public boolean isAcquired() {
         return acquired;
-    }
-
-    public boolean equals(MedicineDispensingLine medicineDispensingLine) {
-        return ePrescription==medicineDispensingLine.getePrescription() && acquired==medicineDispensingLine.isAcquired()
-                && productSpec.equals(medicineDispensingLine.getProductSpec()) && productSaleLine.equals(productSaleLine);
     }
 
     public ProductSpecification getProductSpec() {
@@ -42,7 +34,7 @@ public class MedicineDispensingLine {
     }
 
     public ProductSpecification getProductSpec(ProductID productID) {
-        return productSpec;
+        return ePrescription.getProductSpec(productID);
     }
 
     public void setAcquired() {

@@ -1,6 +1,7 @@
-package data;
+package cat.udl.ep.data;
 
-import data.exceptions.FormatErrorException;
+
+import cat.udl.ep.data.exceptions.FormatErrorException;
 
 import java.math.BigDecimal;
 

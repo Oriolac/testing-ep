@@ -1,9 +1,9 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
-import data.PatientContr;
-import data.ProductID;
-import pharmacy.exceptions.ProductNotInDispensingException;
-import pharmacy.exceptions.SaleClosedException;
+import cat.udl.ep.DispensingTerminal;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -21,11 +21,7 @@ public class Sale {
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> productSaleLines;
     private final Dispensing ePrescription;
-    private DispensingTerminal dispensingTerminal;
-
-    public Sale() {
-        ePrescription = null;
-    }
+    private final DispensingTerminal dispensingTerminal;
 
     public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
@@ -37,15 +33,12 @@ public class Sale {
         this.dispensingTerminal = dispensingTerminal;
     }
 
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         if (!isClosed()) {
-            if (isDispensable(prodID)) {
-                ProductSaleLine prodSaleLine = new ProductSaleLine(this, getProductSpec(prodID), price, contr);
-                ePrescription.getMedicineDispensingLine(prodID).setProductSaleLine(prodSaleLine);
-                productSaleLines.add(prodSaleLine);
-            } else {
-                throw new ProductNotInDispensingException("El producte no és un dels dispensables per la eRecepta.");
-            }
+            // TODO: Comprovar que el producte és un dels dispensables
+            MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
+            ProductSaleLine prodSaleLine = new ProductSaleLine(this, medDispensingLine, price, contr);
+            productSaleLines.add(prodSaleLine);
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
@@ -64,10 +57,6 @@ public class Sale {
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
-    }
-
-    private boolean isDispensable(ProductID prodId) {
-        return ePrescription.getDispensableMedicines().contains(prodId);
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
@@ -104,12 +93,6 @@ public class Sale {
 
     public Dispensing getePrescription() { return ePrescription; }
 
-    public DispensingTerminal getDispensingTerminal() {
-        return dispensingTerminal;
-    }
-
-    public ProductSpecification getProductSpec(ProductID prodID) {
-        return ePrescription.getProductSpec(prodID);
-    }
+    public DispensingTerminal getDispensingTerminal() { return dispensingTerminal; }
 
 }

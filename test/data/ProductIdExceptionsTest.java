@@ -1,13 +1,12 @@
-package data;
-
-import data.exceptions.ProductIDException;
-import data.testInterfaces.DataExceptionsTest;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.Test;
+import testInterfaces.DataClassesInterfaceTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class ProductIdExceptionsTest implements DataExceptionsTest {
+public class ProductIdExceptionsTest implements DataClassesInterfaceTest {
     private ProductID productID;
 
     @Override
@@ -17,23 +16,26 @@ public class ProductIdExceptionsTest implements DataExceptionsTest {
                 () -> productID = new ProductID(null));
     }
 
+    @Override
     @Test
-    public void getValueTest() throws ProductIDException {
+    public void getValueTest() throws FormatErrorException {
         productID = new ProductID("123456789154");
         String code = "123456789154";
         assertTrue(productID.getProductCode().equals(code));
     }
 
+    @Override
     @Test
-    public void equalsTest() throws ProductIDException {
+    public void equalsTest() throws FormatErrorException {
         ProductID productId1, productId2;
         productId1 = new ProductID("123456789012");
         productId2 = new ProductID("123456789012");
         assertTrue(productId1.equals(productId2));
     }
 
+    @Override
     @Test
-    public void notEqualsTest() throws ProductIDException {
+    public void notEqualsTest() throws FormatErrorException {
         ProductID productId1, productId2;
         productId1 = new ProductID("123456789012");
         productId2 = new ProductID("123456789011");
@@ -45,10 +47,10 @@ public class ProductIdExceptionsTest implements DataExceptionsTest {
 
     @Override
     @Test
-    public void dataErrorExceptionTest() {
-        Throwable exception = assertThrows(ProductIDException.class,
+    public void formatErrorExceptionTest() {
+        Throwable exception = assertThrows(FormatErrorException.class,
                 () -> productID = new ProductID("12345678901"));
-        exception = assertThrows(ProductIDException.class,
+        exception = assertThrows(FormatErrorException.class,
                 () -> productID = new ProductID("12345678901a"));
     }
 }

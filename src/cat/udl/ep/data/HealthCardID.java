@@ -1,6 +1,6 @@
-package data;
+package cat.udl.ep.data;
 
-import data.exceptions.HealthCardException;
+import cat.udl.ep.services.exceptions.HealthCardException;
 
 final public class HealthCardID {
     private final String personalID;
