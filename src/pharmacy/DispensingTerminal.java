@@ -34,7 +34,7 @@ public class DispensingTerminal {
         this.HCR = HCR;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidPrescriptionException, ConnectException, PatientIDException, NotValidePrescriptionException {
+    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException, NotValidePrescriptionException {
         switch (option){
             case BY_HEALTHCARD:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
