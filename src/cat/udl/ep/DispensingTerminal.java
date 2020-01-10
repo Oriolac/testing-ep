@@ -1,15 +1,12 @@
 package cat.udl.ep;
 
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.*;
 import cat.udl.ep.services.exceptions.HealthCardException;
 import cat.udl.ep.services.exceptions.ProductIDException;
 import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.ProductSpecification;
 import cat.udl.ep.pharmacy.Sale;
-import cat.udl.ep.pharmacy.exceptions.DispensingNotAvailableException;
-import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
-import cat.udl.ep.pharmacy.exceptions.PatientIDException;
-import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
 import cat.udl.ep.services.HealthCardReader;
 import cat.udl.ep.services.NationalHealthService;
 import cat.udl.ep.services.exceptions.QuantityMinorThanImport;
@@ -25,10 +22,14 @@ public class DispensingTerminal {
     final static private char BY_SHEET_TREATMENT = 't';
     final static private char MANUALLY = 'm';
 
-    Sale sale;
-    Dispensing ePrescription;
-    NationalHealthService SNS;
-    HealthCardReader HCR;
+    private Sale sale;
+    private Dispensing ePrescription;
+    private NationalHealthService SNS;
+    private HealthCardReader HCR;
+
+    public DispensingTerminal() {
+
+    }
 
     public DispensingTerminal(NationalHealthService SNS, HealthCardReader HCR) {
         this.SNS = SNS;
@@ -55,8 +56,8 @@ public class DispensingTerminal {
         sale = new Sale(this, ePrescription);
     }
 
-    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductIDException, HealthCardException {
-        ProductSpecification productSpecification = SNS.getProductSpecific(pID);
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductIDException, HealthCardException, ProductNotInDispensingException {
+        ProductSpecification productSpecification = getProductSpec(pID);
         sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
         ePrescription.setProductAsDispensed(pID);
     }
