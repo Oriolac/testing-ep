@@ -76,12 +76,20 @@ public class DispensingTerminal {
         //TODO: S'ha d'acabar de fer a la part opcional!!
     }
 
-    public void realizePayment() {
-        throw new NotImplementedException();
+    public void realizePayment(float quantity)  {
+        try {
+            throw new NotImplementedException();
+        } catch (NotImplementedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void printNextDispensingSheet() {
-        throw new NotImplementedException();
+        try {
+            throw new NotImplementedException();
+        } catch (NotImplementedException e) {
+            e.printStackTrace();
+        }
     }
 
     public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
