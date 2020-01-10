@@ -23,6 +23,7 @@ public class DispensingTerminal {
     final static private char MANUALLY = 'm';
 
     private Sale sale;
+
     private Dispensing ePrescription;
     private NationalHealthService SNS;
     private HealthCardReader HCR;
@@ -95,6 +96,22 @@ public class DispensingTerminal {
 
     public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
         return SNS.getProductSpecific(productID);
+    }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public Dispensing getePrescription() {
+        return ePrescription;
+    }
+
+    public NationalHealthService getSNS() {
+        return SNS;
+    }
+
+    public HealthCardReader getHCR() {
+        return HCR;
     }
 
 }
