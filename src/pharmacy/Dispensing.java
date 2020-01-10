@@ -44,7 +44,7 @@ public class Dispensing {
     }
 
     public ProductSpecification getProductSpec(ProductID productID) {
-        return dispensingTerminal.getProductSpec(productID);
+        return medicineDispensingLines.get(productID).getProductSpec();
     }
 
     public Date getFinalDate() {
