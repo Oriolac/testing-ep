@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 
 public interface NullInterfaceTest {
 
-    @Test
-    void nullConstructorParameterTest();
 
     @Test
     void nullEqualsParameterTest();

@@ -1,14 +1,13 @@
 package data.HealthCardId;
 
+import data.HealthCardID;
 import data.testInterfaces.NullInterfaceTest;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class HealthCardIDNullTest implements NullInterfaceTest {
 
-    @Override
-    public void nullConstructorParameterTest() {
-
-
-    }
+    private HealthCardID healthCardId;
 
     @Override
     public void nullEqualsParameterTest() {
