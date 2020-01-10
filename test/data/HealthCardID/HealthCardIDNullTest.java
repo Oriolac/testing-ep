@@ -1,4 +1,4 @@
-package data.HealthCardId;
+package data.HealthCardID;
 
 import data.HealthCardID;
 import data.testInterfaces.NullInterfaceTest;
