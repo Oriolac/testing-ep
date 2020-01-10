@@ -40,7 +40,7 @@ public class Sale {
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
         if (!isClosed()) {
             if (isDispensable(prodID)) {
-                ProductSaleLine prodSaleLine = new ProductSaleLine(this, ePrescription.getProductSpec(prodID), price, contr);
+                ProductSaleLine prodSaleLine = new ProductSaleLine(this, getProductSpec(prodID), price, contr);
                 productSaleLines.add(prodSaleLine);
             } else {
                 throw new ProductNotInDispensingException("El producte no és un dels dispensables per la eRecepta.");
@@ -105,6 +105,10 @@ public class Sale {
 
     public DispensingTerminal getDispensingTerminal() {
         return dispensingTerminal;
+    }
+
+    public ProductSpecification getProductSpec(ProductID prodID) {
+        return ePrescription.getProductSpec(prodID);
     }
 
 }
