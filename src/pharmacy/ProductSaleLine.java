@@ -13,9 +13,14 @@ public class ProductSaleLine {
 
     public ProductSaleLine(Sale sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
         this.sale = sale;
-        this.medDispensingLine = medDispensingLine;
+        this.medDispensingLine = sale.getePrescription().getMedicineDispensingLine(productSpec.getProdID());
         this.productSpec = productSpec;
         this.subtotal = price.multiply(contr.getPatCont());
+    }
+
+    public boolean equals(ProductSaleLine productSaleLine) {
+        return this.sale==productSaleLine.getSale() && this.medDispensingLine.equals(productSaleLine.getMedDispensingLine())
+                && this.productSpec.equals(productSaleLine.getProductSpec()) && this.subtotal.equals(productSaleLine.getSubtotal());
     }
 
     public ProductSpecification getProductSpec() {
