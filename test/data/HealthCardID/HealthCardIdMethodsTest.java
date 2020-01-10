@@ -41,11 +41,11 @@ public class HealthCardIdMethodsTest implements DataMethodsTest {
     @Override
     @Test
     public void formatErrorExceptionTest() {
-        assertThrows(FormatErrorException.class,
+        assertThrows(HealthCardException.class,
                 () ->  new HealthCardID("IBMI47329832019"));
-        assertThrows(FormatErrorException.class,
+        assertThrows(HealthCardException.class,
                 () ->  new HealthCardID("B325897653492301"));
-        assertThrows(FormatErrorException.class,
+        assertThrows(HealthCardException.class,
                 () ->  new HealthCardID("BINO89765Z492301"));
     }
 

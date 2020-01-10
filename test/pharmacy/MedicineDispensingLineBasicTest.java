@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class MedicineDispensingLineBasicTest {
     private MedicineDispensingLine medDispensingLine;
-/*
+
     @BeforeEach
     public void initMedDispensingLine() throws ProductIDException, ConnectException {
         ProductSpecification prodSpec = new ProductSpecification();
@@ -25,5 +25,5 @@ public class MedicineDispensingLineBasicTest {
     @Test
     public void isAcquiredTest() {
         assertTrue(!medDispensingLine.isAcquired());
-    }*/
+    }
 }

@@ -47,9 +47,9 @@ public class ProductIdMethodsTest implements DataMethodsTest {
 
     @Test
     public void formatErrorExceptionTest() {
-        assertThrows(FormatErrorException.class,
+        assertThrows(ProductIDException.class,
                 () -> new ProductID("12345678901"));
-        assertThrows(FormatErrorException.class,
+        assertThrows(ProductIDException.class,
                 () -> new ProductID("12345678901a"));
     }
 }

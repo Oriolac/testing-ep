@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ProductSaleLineBasicTest {
     private ProductSaleLine productSaleLine;
-/*
+
     @BeforeEach
     public void initProductSaleLine() throws FormatErrorException {
         Sale sale = new Sale();
@@ -31,6 +31,5 @@ public class ProductSaleLineBasicTest {
         BigDecimal n_exp_subtotal = new BigDecimal("4.0");
 
         assertTrue(exp_subtotal.compareTo(obt_subtotal) == 0);
-        assertTrue(n_exp_subtotal.compareTo(obt_subtotal) < 0);
-    }*/
+    }
 }

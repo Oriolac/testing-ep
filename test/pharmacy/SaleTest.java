@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SaleTest {
-/*
+
     private Sale sale;
     private Dispensing ePrescription;
 
@@ -33,7 +33,7 @@ public class SaleTest {
     }
 
     @Test
-    public void addLineTest() throws ProductIDException, FormatErrorException, SaleClosedException, ProductNotInDispensingException {
+    public void addLineTest() throws ProductIDException, FormatErrorException, SaleClosedException, ProductNotInDispensingException, ConnectException {
         ProductID prod1 = new ProductID("111111111111");
         BigDecimal price = new BigDecimal("9.99");
         PatientContr contr = new PatientContr(new BigDecimal("0.5"));
@@ -68,5 +68,5 @@ public class SaleTest {
         dispensableMedicines.put(prod1, new MedicineDispensingLine(ePrescription, prodSpec1));
 
         return dispensableMedicines;
-    }*/
+    }
 }
