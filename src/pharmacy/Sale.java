@@ -40,7 +40,6 @@ public class Sale {
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
         if (!isClosed()) {
             if (isDispensable(prodID)) {
-                MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
                 ProductSaleLine prodSaleLine = new ProductSaleLine(this, ePrescription.getProductSpec(prodID), price, contr);
                 productSaleLines.add(prodSaleLine);
             } else {
