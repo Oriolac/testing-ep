@@ -22,7 +22,7 @@ public class MedicineDispensingLine {
 
     public boolean equals(MedicineDispensingLine medicineDispensingLine) {
         return ePrescription==medicineDispensingLine.getePrescription() && acquired==medicineDispensingLine.isAcquired()
-                && productSpec.equals(medicineDispensingLine.getProductSpec()) && productSaleLine.equals(productSaleLine);
+                && productSpec.equals(medicineDispensingLine.getProductSpec());
     }
 
     public ProductSpecification getProductSpec() {
