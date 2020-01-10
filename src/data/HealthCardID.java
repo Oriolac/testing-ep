@@ -1,6 +1,5 @@
 package data;
 
-import data.exceptions.FormatErrorException;
 import data.exceptions.HealthCardException;
 
 final public class HealthCardID {
