@@ -36,7 +36,7 @@ public class Sale {
         if (!isClosed()) {
             // TODO: Comprovar que el producte és un dels dispensables
             MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
-            ProductSaleLine prodSaleLine = new ProductSaleLine(this, medDispensingLine, price, contr);
+            ProductSaleLine prodSaleLine = new ProductSaleLine(this, ePrescription.getProductSpec(prodID), price, contr);
             productSaleLines.add(prodSaleLine);
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
