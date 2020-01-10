@@ -1,5 +1,6 @@
 package pharmacy;
 
+import data.DispensableMedicines;
 import data.ProductID;
 import pharmacy.exceptions.DispensingNotAvailableException;
 import java.time.Instant;
@@ -13,11 +14,11 @@ public class Dispensing {
     private byte nOrder; // n. of order for this dispensing inside the treatment
     private Date initDate, finalDate; // The period
     private boolean isCompleted;
-    private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
+    private DispensableMedicines medicineDispensingLines;
     private Sale sale;
     private DispensingTerminal dispensingTerminal;
 
-    public Dispensing(Date initDate, Date finalDate, HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines) {
+    public Dispensing(Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {
         nOrder = (byte) hashCode();
         this.initDate = initDate;
         this.finalDate = finalDate;
@@ -53,6 +54,10 @@ public class Dispensing {
 
     public MedicineDispensingLine getMedicineDispensingLine(ProductID productID) {
         return medicineDispensingLines.get(productID);
+    }
+
+    public DispensableMedicines getDispensableMedicines() {
+        return medicineDispensingLines;
     }
 
     public void setCompleted() {
