@@ -1,11 +1,11 @@
-package data;
+package cat.udl.ep.data;
 
-import data.exceptions.FormatErrorException;
+import cat.udl.ep.services.exceptions.ProductIDException;
 
 final public class ProductID {
     private final String productCode;
 
-    public ProductID (String code) throws NullPointerException, FormatErrorException {
+    public ProductID (String code) throws NullPointerException, ProductIDException {
         if (code == null) {
             throw new NullPointerException("Rebut objecte sense instanciar.");
         }
@@ -13,7 +13,7 @@ final public class ProductID {
         if (isValidUPC(code)) {
             this.productCode = code;
         } else {
-            throw new FormatErrorException("Error amb el format del UPC.");
+            throw new ProductIDException("Error amb el format del UPC.");
         }
     }
 
@@ -42,13 +42,7 @@ final public class ProductID {
         if (code.length() != 12) {
             return false;
         } else {
-            for (int i=0; i<12; i++) {
-                current_char = code.charAt(i);
-                if (!Character.isDigit(current_char)) {
-                    return false;
-                }
-            }
-            return true;
+            return code.chars().allMatch(Character::isDigit);
         }
     }
 }

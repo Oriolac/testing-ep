@@ -1,8 +1,9 @@
-package pharmacy;
+package cat.udl.ep.pharmacy;
 
-import data.PatientContr;
-import data.ProductID;
-import pharmacy.exceptions.SaleClosedException;
+import cat.udl.ep.DispensingTerminal;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -19,18 +20,25 @@ public class Sale {
     private BigDecimal amount;
     private boolean isClosed; // flag to know if the sale is closed
     private List<ProductSaleLine> productSaleLines;
+    private final Dispensing ePrescription;
+    private final DispensingTerminal dispensingTerminal;
 
-    public Sale() {
+    public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
         date = new Date();
         amount = new BigDecimal("0.0");
         isClosed = false;
         productSaleLines = new ArrayList<>();
+        this.ePrescription = ePrescription;
+        this.dispensingTerminal = dispensingTerminal;
     }
 
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException {
         if (!isClosed()) {
-            productSaleLines.add(new ProductSaleLine(prodID, price, contr));
+            // TODO: Comprovar que el producte és un dels dispensables
+            MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
+            ProductSaleLine prodSaleLine = new ProductSaleLine(this, medDispensingLine, price, contr);
+            productSaleLines.add(prodSaleLine);
         } else {
             throw new SaleClosedException("La venda ja ha estat tancada.");
         }
@@ -52,8 +60,11 @@ public class Sale {
     }
 
     public void calculateFinalAmount() throws SaleClosedException {
+        if (isClosed())
+            throw new SaleClosedException("La venta ja està tancada");
         calculateAmount();
         addTaxes();
+        setClosed();
     }
 
     public BigDecimal getAmount() {
@@ -79,5 +90,9 @@ public class Sale {
     public List<ProductSaleLine> getProductSaleLines() {
         return productSaleLines;
     }
+
+    public Dispensing getePrescription() { return ePrescription; }
+
+    public DispensingTerminal getDispensingTerminal() { return dispensingTerminal; }
 
 }

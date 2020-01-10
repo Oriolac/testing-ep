@@ -1,5 +1,5 @@
-import data.PatientContr;
-import data.exceptions.FormatErrorException;
+import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.exceptions.FormatErrorException;
 import org.junit.jupiter.api.Test;
 import testInterfaces.DataClassesInterfaceTest;
 
