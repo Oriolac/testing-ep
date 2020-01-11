@@ -1,18 +1,12 @@
 package dispensing_terminal_test;
 
 import cat.udl.ep.DispensingTerminal;
-import cat.udl.ep.pharmacy.Dispensing;
-import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
 import cat.udl.ep.services.HealthCardReader;
 import cat.udl.ep.services.NationalHealthService;
 import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
-import cat.udl.ep.services.exceptions.HealthCardException;
-import cat.udl.ep.services.exceptions.PatientIDException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.net.ConnectException;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -30,7 +24,9 @@ public class DispensingTerminalMethodsTest {
     }
 
     @Test
-    public void getePrescriptionTest() throws HealthCardException, PatientIDException, ConnectException, NotValidePrescriptionException {
+    public void getePrescriptionTest() {
         assertDoesNotThrow(() -> dispensingTerminal.getePrescription('i'));
     }
+
+
 }

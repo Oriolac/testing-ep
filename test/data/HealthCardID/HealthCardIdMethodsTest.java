@@ -1,6 +1,7 @@
 package data.HealthCardID;
 
 import cat.udl.ep.data.HealthCardID;
+import cat.udl.ep.data.exceptions.PatientIDException;
 import cat.udl.ep.services.exceptions.HealthCardException;
 import data.testInterfaces.DataMethodsTest;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,7 +16,7 @@ public class HealthCardIdMethodsTest implements DataMethodsTest {
     private String code = "IBMI473298320193";
 
     @BeforeEach
-    public void init() throws HealthCardException {
+    public void init() throws PatientIDException {
         healthCardId1 = new HealthCardID(code);
     }
 
@@ -25,14 +26,14 @@ public class HealthCardIdMethodsTest implements DataMethodsTest {
     }
 
     @Test
-    public void equalsTest() throws HealthCardException {
+    public void equalsTest() throws PatientIDException {
         HealthCardID healthCardId2;
         healthCardId2 = new HealthCardID(code);
         assertEquals(healthCardId1, healthCardId2);
     }
 
     @Test
-    public void notEqualsTest() throws HealthCardException {
+    public void notEqualsTest() throws PatientIDException {
         HealthCardID healthCardId2 = new HealthCardID("ZZZZ473298320193");
         assertNotEquals(healthCardId1, healthCardId2);
         assertNotEquals(null, healthCardId1);
@@ -42,11 +43,11 @@ public class HealthCardIdMethodsTest implements DataMethodsTest {
     @Override
     @Test
     public void formatErrorExceptionTest() {
-        assertThrows(HealthCardException.class,
+        assertThrows(PatientIDException.class,
                 () ->  new HealthCardID("IBMI47329832019"));
-        assertThrows(HealthCardException.class,
+        assertThrows(PatientIDException.class,
                 () ->  new HealthCardID("B325897653492301"));
-        assertThrows(HealthCardException.class,
+        assertThrows(PatientIDException.class,
                 () ->  new HealthCardID("BINO89765Z492301"));
     }
 

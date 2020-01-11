@@ -4,6 +4,7 @@ import cat.udl.ep.pharmacy.MedicineDispensingLine;
 
 
 import java.util.*;
+import java.util.function.Predicate;
 
 
 public class DispensableMedicines {

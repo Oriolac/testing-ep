@@ -4,13 +4,14 @@ import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.data.exceptions.ProductIDException;
 import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.MedicineDispensingLine;
 import cat.udl.ep.pharmacy.ProductSpecification;
 import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
 import cat.udl.ep.services.NationalHealthService;
 import cat.udl.ep.services.exceptions.HealthCardException;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.services.exceptions.ProductNotFoundException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
@@ -56,7 +57,7 @@ public class SNS implements NationalHealthService {
     }
 
     @Override
-    public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
+    public ProductSpecification getProductSpecific(ProductID pID) throws ProductNotFoundException, ConnectException {
         return null;
     }
 
