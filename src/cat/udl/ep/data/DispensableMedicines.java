@@ -2,13 +2,10 @@ package cat.udl.ep.data;
 
 import cat.udl.ep.pharmacy.MedicineDispensingLine;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
+
+import java.util.*;
 import java.util.function.Predicate;
+
 
 public class DispensableMedicines {
     private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
@@ -29,6 +26,9 @@ public class DispensableMedicines {
         return medicineDispensingLines.containsKey(prodId);
     }
 
+    public HashMap<ProductID, MedicineDispensingLine> medicineDispensingLinesHashMap() {
+        return medicineDispensingLines;
+    }
 
 
     public boolean allMatch(Predicate<? super MedicineDispensingLine> action) {
