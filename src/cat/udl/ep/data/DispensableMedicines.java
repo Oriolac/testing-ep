@@ -2,7 +2,7 @@ package cat.udl.ep.data;
 
 import cat.udl.ep.pharmacy.MedicineDispensingLine;
 
-import java.util.HashMap;
+import java.util.*;
 
 public class DispensableMedicines {
     private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
@@ -22,4 +22,9 @@ public class DispensableMedicines {
     public boolean contains(ProductID prodId) {
         return medicineDispensingLines.containsKey(prodId);
     }
+
+    public HashMap<ProductID, MedicineDispensingLine> medicineDispensingLinesHashMap() {
+        return medicineDispensingLines;
+    }
+
 }

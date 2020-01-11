@@ -22,6 +22,11 @@ public class Dispensing {
     private Sale sale;
     private DispensingTerminal dispensingTerminal;
 
+    public Dispensing(Date initDate, Date finalDate) {
+        this((byte) 0, initDate, finalDate, null);
+        this.nOrder = (byte) hashCode();
+    }
+
     public Dispensing(Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {
         this((byte) 0, initDate, finalDate, medicineDispensingLines);
         this.nOrder = (byte) hashCode();
@@ -82,6 +87,10 @@ public class Dispensing {
 
     public void setDispensingTerminal(DispensingTerminal dispensingTerminal) {
         this.dispensingTerminal = dispensingTerminal;
+    }
+
+    public void setMedicineDispensingLines(DispensableMedicines medicineDispensingLines) {
+        this.medicineDispensingLines = medicineDispensingLines;
     }
 
     @Override
