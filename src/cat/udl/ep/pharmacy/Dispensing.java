@@ -9,6 +9,7 @@ import cat.udl.ep.pharmacy.exceptions.DispensingNotAvailableException;
 import cat.udl.ep.pharmacy.exceptions.AcquiredMedicineDispensingLineException;
 
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Date;
 
 public class Dispensing {
@@ -62,6 +63,8 @@ public class Dispensing {
             throw new AcquiredMedicineDispensingLineException();
         medDispensingLine.setAcquired();
         medicineDispensingLines.put(prodID, medDispensingLine);
+        if(medicineDispensingLines.allMatch(MedicineDispensingLine::isAcquired))
+            setCompleted();
     }
 
     public Date getInitDate() {
