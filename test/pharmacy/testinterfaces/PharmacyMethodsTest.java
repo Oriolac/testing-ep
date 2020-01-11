@@ -9,13 +9,13 @@ import java.net.ConnectException;
 public interface PharmacyMethodsTest {
 
     @Test
-    void equalsTest() throws ProductIDException, ConnectException;
+    void equalsTest() throws ProductIDException, ConnectException, FormatErrorException;
 
     @Test
-    void notEqualsTest() throws ProductIDException, ConnectException;
+    void notEqualsTest() throws ProductIDException, ConnectException, FormatErrorException;
 
     @Test
-    void gettersTest();
+    void gettersTest() throws ProductIDException;
 
     @Test
     void settersTest() throws FormatErrorException;

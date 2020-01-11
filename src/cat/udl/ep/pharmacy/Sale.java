@@ -26,10 +26,6 @@ public class Sale implements SaleInt {
     private final Dispensing ePrescription;
     private DispensingTerminal dispensingTerminal;
 
-    public Sale() {
-        ePrescription = null;
-    }
-
     public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
         date = new Date();
