@@ -5,12 +5,12 @@ import cat.udl.ep.data.PatientContr;
 import java.math.BigDecimal;
 
 public class ProductSaleLine {
-    private Sale sale;
+    private SaleInt sale;
     private MedicineDispensingLine medDispensingLine;
     private ProductSpecification productSpec;
     private BigDecimal subtotal;
 
-    public ProductSaleLine(Sale sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
+    public ProductSaleLine(SaleInt sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
         this.sale = sale;
         this.medDispensingLine = null;
         if (sale.getePrescription() != null) {
@@ -20,10 +20,17 @@ public class ProductSaleLine {
         this.subtotal = price.multiply(contr.getPatCont());
     }
 
-    public boolean equals(ProductSaleLine productSaleLine) {
-        return this.sale==productSaleLine.getSale() && this.medDispensingLine.equals(productSaleLine.getMedDispensingLine())
-            && this.productSpec.equals(productSaleLine.getProductSpec()) && this.subtotal.equals(productSaleLine.getSubtotal());
+    @Override
+    public boolean equals(Object productSaleLine) {
+        if (!(productSaleLine instanceof ProductSaleLine))
+            return false;
+        ProductSaleLine obj = (ProductSaleLine) productSaleLine;
+        if(medDispensingLine != null)
+            return this.medDispensingLine.equals(obj.getMedDispensingLine())
+                    && this.productSpec.equals(obj.getProductSpec()) && this.subtotal.equals(obj.getSubtotal());
+        return this.productSpec.equals(obj.getProductSpec()) && this.subtotal.equals(obj.getSubtotal());
     }
+
 
     public ProductSpecification getProductSpec() {
         return productSpec;
@@ -33,7 +40,7 @@ public class ProductSaleLine {
         return medDispensingLine;
     }
 
-    public Sale getSale() {
+    public SaleInt getSale() {
         return sale;
     }
 

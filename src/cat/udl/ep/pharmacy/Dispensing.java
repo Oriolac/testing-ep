@@ -23,20 +23,18 @@ public class Dispensing {
     private DispensingTerminal dispensingTerminal;
 
     public Dispensing(Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {
-        nOrder = (byte) hashCode();
+        this((byte) 0, initDate, finalDate, medicineDispensingLines);
+        this.nOrder = (byte) hashCode();
+    }
+
+    public Dispensing(byte nOrder, Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {
+        this.nOrder = nOrder;
         this.initDate = initDate;
         this.finalDate = finalDate;
         isCompleted = false;
         this.medicineDispensingLines = medicineDispensingLines;
     }
 
-    public Dispensing(DispensableMedicines medicineDispensingLines) {
-        this.medicineDispensingLines = medicineDispensingLines;
-    }
-
-    public Dispensing() {
-
-    }
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException{
         if(Date.from(Instant.now()).after(getInitDate())) {
@@ -56,7 +54,7 @@ public class Dispensing {
         return initDate;
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
+    public ProductSpecification getProductSpec(ProductID productID) {
         return medicineDispensingLines.get(productID).getProductSpec();
     }
 
@@ -84,5 +82,14 @@ public class Dispensing {
 
     public void setDispensingTerminal(DispensingTerminal dispensingTerminal) {
         this.dispensingTerminal = dispensingTerminal;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Dispensing)){
+            return false;
+        }
+        Dispensing o = (Dispensing) obj;
+        return this.nOrder == o.nOrder;
     }
 }

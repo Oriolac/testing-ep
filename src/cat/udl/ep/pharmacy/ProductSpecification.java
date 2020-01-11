@@ -11,10 +11,6 @@ public class ProductSpecification {
     private MedicineDispensingLine medDispensingLine;
     private ProductSaleLine prodSaleLine;
 
-    public ProductSpecification() {
-
-    }
-
     public ProductSpecification(ProductID productID, String description, BigDecimal price) {
         this.prodID = productID;
         this.description = description;
@@ -22,7 +18,7 @@ public class ProductSpecification {
     }
 
     public boolean equals(ProductSpecification productSpec) {
-        return prodID.equals(productSpec.getProdID()) && description==productSpec.description && price.equals(productSpec.getPrice());
+        return prodID.equals(productSpec.getProdID()) && description.equals(productSpec.description) && price.equals(productSpec.getPrice());
     }
 
     public BigDecimal getPrice() {
@@ -37,9 +33,13 @@ public class ProductSpecification {
         this.medDispensingLine = medDispensingLine;
     }
 
+    public MedicineDispensingLine getMedDispensingLine() { return this.medDispensingLine; }
+
     public void setProdSaleLine(ProductSaleLine prodSaleLine) {
         this.prodSaleLine = prodSaleLine;
     }
+
+    public ProductSaleLine getProdSaleLine() { return this.prodSaleLine; }
 
     public ProductID getProdID() {
         return prodID;
