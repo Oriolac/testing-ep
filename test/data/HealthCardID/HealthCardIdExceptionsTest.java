@@ -1,7 +1,6 @@
 package data.HealthCardID;
 
 import cat.udl.ep.data.HealthCardID;
-import cat.udl.ep.data.exceptions.HealthCardException;
 import cat.udl.ep.data.exceptions.PatientIDException;
 import data.testInterfaces.DataExceptionsTest;
 import data.testInterfaces.NullInterfaceTest;

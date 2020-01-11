@@ -1,6 +1,5 @@
 package cat.udl.ep.data;
 
-import cat.udl.ep.data.exceptions.HealthCardException;
 import cat.udl.ep.data.exceptions.PatientIDException;
 
 final public class HealthCardID {
