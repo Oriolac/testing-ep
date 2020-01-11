@@ -5,6 +5,7 @@ import cat.udl.ep.data.ProductID;
 import cat.udl.ep.services.exceptions.ProductIDException;
 
 import java.net.ConnectException;
+import java.util.Objects;
 
 public class MedicineDispensingLine {
     private boolean acquired;
@@ -12,11 +13,27 @@ public class MedicineDispensingLine {
     private ProductSaleLine productSaleLine;
     private Dispensing ePrescription;
 
-    public MedicineDispensingLine(Dispensing ePrescription, ProductSpecification productSpec) throws ProductIDException, ConnectException {
+    public MedicineDispensingLine(Dispensing ePrescription, ProductSpecification productSpec) {
         this.ePrescription = ePrescription;
         this.acquired = false;
         this.productSpec = productSpec;
         this.productSaleLine = null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MedicineDispensingLine that = (MedicineDispensingLine) o;
+        return acquired == that.acquired &&
+                Objects.equals(productSpec, that.productSpec) &&
+                Objects.equals(productSaleLine, that.productSaleLine) &&
+                Objects.equals(ePrescription, that.ePrescription);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(acquired, productSpec, productSaleLine, ePrescription);
     }
 
     public boolean isAcquired() {
@@ -38,10 +55,6 @@ public class MedicineDispensingLine {
 
     public Dispensing getePrescription() {
         return ePrescription;
-    }
-
-    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
-        return ePrescription.getProductSpec(productID);
     }
 
     public void setAcquired() {

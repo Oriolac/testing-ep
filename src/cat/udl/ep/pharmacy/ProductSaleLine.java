@@ -5,12 +5,12 @@ import cat.udl.ep.data.PatientContr;
 import java.math.BigDecimal;
 
 public class ProductSaleLine {
-    private Sale sale;
+    private SaleInt sale;
     private MedicineDispensingLine medDispensingLine;
     private ProductSpecification productSpec;
     private BigDecimal subtotal;
 
-    public ProductSaleLine(Sale sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
+    public ProductSaleLine(SaleInt sale, ProductSpecification productSpec, BigDecimal price, PatientContr contr) {
         this.sale = sale;
         this.medDispensingLine = null;
         if (sale.getePrescription() != null) {
@@ -33,7 +33,7 @@ public class ProductSaleLine {
         return medDispensingLine;
     }
 
-    public Sale getSale() {
+    public SaleInt getSale() {
         return sale;
     }
 

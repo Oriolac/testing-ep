@@ -17,7 +17,7 @@ import java.util.List;
  * Package for the classes involved in the use case Suply next dispensing
  */
 
-public class Sale {
+public class Sale implements SaleInt {
     private int saleCode;
     private Date date;
     private BigDecimal amount;
@@ -109,7 +109,7 @@ public class Sale {
 
     public DispensingTerminal getDispensingTerminal() { return dispensingTerminal; }
 
-    public ProductSpecification getProductSpec(ProductID prodID) throws ProductIDException, ConnectException {
+    public ProductSpecification getProductSpec(ProductID prodID) {
         return ePrescription.getProductSpec(prodID);
     }
 

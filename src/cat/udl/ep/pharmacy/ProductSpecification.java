@@ -11,10 +11,6 @@ public class ProductSpecification {
     private MedicineDispensingLine medDispensingLine;
     private ProductSaleLine prodSaleLine;
 
-    public ProductSpecification() {
-
-    }
-
     public ProductSpecification(ProductID productID, String description, BigDecimal price) {
         this.prodID = productID;
         this.description = description;

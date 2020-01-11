@@ -30,13 +30,7 @@ public class Dispensing {
         this.medicineDispensingLines = medicineDispensingLines;
     }
 
-    public Dispensing(DispensableMedicines medicineDispensingLines) {
-        this.medicineDispensingLines = medicineDispensingLines;
-    }
 
-    public Dispensing() {
-
-    }
 
     public boolean dispensingEnabled() throws DispensingNotAvailableException{
         if(Date.from(Instant.now()).after(getInitDate())) {
@@ -56,7 +50,7 @@ public class Dispensing {
         return initDate;
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
+    public ProductSpecification getProductSpec(ProductID productID) {
         return medicineDispensingLines.get(productID).getProductSpec();
     }
 
