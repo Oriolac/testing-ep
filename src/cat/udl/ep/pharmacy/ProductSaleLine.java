@@ -20,10 +20,19 @@ public class ProductSaleLine {
         this.subtotal = price.multiply(contr.getPatCont());
     }
 
-    public boolean equals(ProductSaleLine productSaleLine) {
-        return this.sale==productSaleLine.getSale() && this.medDispensingLine.equals(productSaleLine.getMedDispensingLine())
-            && this.productSpec.equals(productSaleLine.getProductSpec()) && this.subtotal.equals(productSaleLine.getSubtotal());
+    @Override
+    public boolean equals(Object productSaleLine) {
+        if (!(productSaleLine instanceof ProductSaleLine))
+            return false;
+        ProductSaleLine obj = (ProductSaleLine) productSaleLine;
+        if(medDispensingLine != null)
+            return this.medDispensingLine.equals(obj.getMedDispensingLine())
+                    && this.productSpec.equals(obj.getProductSpec()) && this.subtotal.equals(obj.getSubtotal());
+        Boolean isTrue = this.productSpec.equals(obj.getProductSpec());
+        isTrue = this.subtotal.equals(obj.getSubtotal());
+        return this.productSpec.equals(obj.getProductSpec()) && this.subtotal.equals(obj.getSubtotal());
     }
+
 
     public ProductSpecification getProductSpec() {
         return productSpec;

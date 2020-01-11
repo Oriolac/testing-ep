@@ -41,7 +41,7 @@ public class ProductSaleLineBasicTest implements PharmacyMethodsTest {
 
     @Test
     public void getSubtotalTest() {
-        BigDecimal exp_subtotal = new BigDecimal("5.0");
+        BigDecimal exp_subtotal = new BigDecimal("0.5");
         BigDecimal n_exp_subtotal = new BigDecimal("4.0");
         assertEquals(exp_subtotal, productSaleLine.getSubtotal());
         assertNotEquals(n_exp_subtotal, productSaleLine.getSubtotal());

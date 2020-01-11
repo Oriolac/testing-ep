@@ -75,6 +75,8 @@ public class MedicineDispensingLineBasicTest implements PharmacyMethodsTest {
 
     public static class SaleDouble implements SaleInt {
 
+        private Dispensing ePrescription;
+
         public SaleDouble(){
 
         }
@@ -82,6 +84,15 @@ public class MedicineDispensingLineBasicTest implements PharmacyMethodsTest {
         @Override
         public Dispensing getePrescription() {
             return null;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof SaleDouble) {
+                SaleDouble sale = (SaleDouble) obj;
+                return ePrescription.equals(sale.getePrescription());
+            }
+            return false;
         }
     }
 }
