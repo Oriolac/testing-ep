@@ -30,7 +30,9 @@ public class SaleExceptionsTest {
     public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException {
         SaleMethodsTest.SNS sns = new SaleMethodsTest.SNS();
         SaleMethodsTest.HCR hcr = new SaleMethodsTest.HCR();
-        dispensingTerminal = new DispensingTerminal(sns, hcr);
+        SaleMethodsTest.SalesHistoryDB sh = new SaleMethodsTest.SalesHistoryDB();
+        SaleMethodsTest.WarehouseDB wh = new SaleMethodsTest.WarehouseDB();
+        dispensingTerminal = new DispensingTerminal(sns, hcr, sh, wh);
         ePrescription = sns.getePrescription(new HealthCardID("ZZZZ473298320193"));
         sale = new Sale(dispensingTerminal, ePrescription);
     }
