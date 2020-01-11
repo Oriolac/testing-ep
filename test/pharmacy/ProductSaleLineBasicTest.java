@@ -90,16 +90,16 @@ public class ProductSaleLineBasicTest implements PharmacyMethodsTest {
 
     @Override
     @Test
-    public void settersTest() throws FormatErrorException {
+    public void settersTest() {
 
     }
 
     static class SaleDouble implements SaleInt {
 
-        private Dispensing ePrescription = null;
+        private Dispensing ePrescription;
 
         public SaleDouble() {
-
+            ePrescription = null;
         }
 
         public void setVoidePrescription(){

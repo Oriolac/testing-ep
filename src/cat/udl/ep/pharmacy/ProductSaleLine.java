@@ -28,8 +28,6 @@ public class ProductSaleLine {
         if(medDispensingLine != null)
             return this.medDispensingLine.equals(obj.getMedDispensingLine())
                     && this.productSpec.equals(obj.getProductSpec()) && this.subtotal.equals(obj.getSubtotal());
-        Boolean isTrue = this.productSpec.equals(obj.getProductSpec());
-        isTrue = this.subtotal.equals(obj.getSubtotal());
         return this.productSpec.equals(obj.getProductSpec()) && this.subtotal.equals(obj.getSubtotal());
     }
 

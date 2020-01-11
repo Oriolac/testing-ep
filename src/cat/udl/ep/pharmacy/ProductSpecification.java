@@ -33,9 +33,13 @@ public class ProductSpecification {
         this.medDispensingLine = medDispensingLine;
     }
 
+    public MedicineDispensingLine getMedDispensingLine() { return this.medDispensingLine; }
+
     public void setProdSaleLine(ProductSaleLine prodSaleLine) {
         this.prodSaleLine = prodSaleLine;
     }
+
+    public ProductSaleLine getProdSaleLine() { return this.prodSaleLine; }
 
     public ProductID getProdID() {
         return prodID;
