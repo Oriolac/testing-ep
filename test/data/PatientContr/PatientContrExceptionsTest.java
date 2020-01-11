@@ -2,7 +2,6 @@ package data.PatientContr;
 
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.exceptions.FormatErrorException;
-import cat.udl.ep.services.exceptions.HealthCardException;
 import data.testInterfaces.DataExceptionsTest;
 import data.testInterfaces.NullInterfaceTest;
 import org.junit.jupiter.api.Test;

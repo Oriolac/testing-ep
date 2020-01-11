@@ -3,6 +3,8 @@ package cat.udl.ep;
 import cat.udl.ep.data.CashPayment;
 import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.services.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.IDException;
 import cat.udl.ep.pharmacy.exceptions.*;
 import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
@@ -37,7 +39,7 @@ public class DispensingTerminal {
         this.warehouse = warehouse;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
+    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException {
         switch (option){
             case BY_HEALTHCARDID:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
@@ -57,7 +59,7 @@ public class DispensingTerminal {
         sale = new Sale(this, ePrescription);
     }
 
-    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductIDException, HealthCardException, ProductNotInDispensingException, DispensingException {
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, IDException, DispensingException, ProductNotInDispensingException, ProductNotFoundException {
         ProductSpecification productSpecification = getProductSpec(pID);
         sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
         ePrescription.setProductAsDispensed(pID);
@@ -88,7 +90,7 @@ public class DispensingTerminal {
         }
     }
 
-    public ProductSpecification getProductSpec(ProductID productID) throws ProductIDException, ConnectException {
+    public ProductSpecification getProductSpec(ProductID productID) throws ConnectException, ProductNotFoundException {
         return SNS.getProductSpecific(productID);
     }
 

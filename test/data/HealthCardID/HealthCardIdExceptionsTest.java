@@ -1,7 +1,7 @@
 package data.HealthCardID;
 
 import cat.udl.ep.data.HealthCardID;
-import cat.udl.ep.services.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.PatientIDException;
 import data.testInterfaces.DataExceptionsTest;
 import data.testInterfaces.NullInterfaceTest;
 import org.junit.jupiter.api.Test;
@@ -21,16 +21,17 @@ public class HealthCardIdExceptionsTest implements DataExceptionsTest, NullInter
     @Override
     @Test
     public void dataErrorExceptionTest() {
-        assertThrows(HealthCardException.class,
+        assertDoesNotThrow(() -> new HealthCardID("IBMI473298320192"));
+        assertThrows(PatientIDException.class,
                 () -> new HealthCardID("IBMI47329832019"));
-        assertThrows(HealthCardException.class,
+        assertThrows(PatientIDException.class,
                 () -> new HealthCardID("B325897653492301"));
-        assertThrows(HealthCardException.class,
+        assertThrows(PatientIDException.class,
                 () -> new HealthCardID("BINO89765Z492301"));
     }
 
     @Override
-    public void nullEqualsParameterTest() throws HealthCardException {
+    public void nullEqualsParameterTest() throws PatientIDException {
         HealthCardID healthCardID = new HealthCardID("IBMI473298320192");
         assertNotEquals(null, healthCardID);
     }

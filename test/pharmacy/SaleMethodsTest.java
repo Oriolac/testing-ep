@@ -16,7 +16,7 @@ import cat.udl.ep.services.NationalHealthService;
 import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.services.exceptions.HealthCardException;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

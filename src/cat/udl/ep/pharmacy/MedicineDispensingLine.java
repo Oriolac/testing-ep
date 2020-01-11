@@ -1,10 +1,6 @@
 package cat.udl.ep.pharmacy;
 
 
-import cat.udl.ep.data.ProductID;
-import cat.udl.ep.services.exceptions.ProductIDException;
-
-import java.net.ConnectException;
 import java.util.Objects;
 
 public class MedicineDispensingLine {

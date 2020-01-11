@@ -5,14 +5,13 @@ import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.FormatErrorException;
 import cat.udl.ep.pharmacy.*;
 import cat.udl.ep.data.DispensableMedicines;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pharmacy.testinterfaces.PharmacyMethodsTest;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
-import java.time.Instant;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;

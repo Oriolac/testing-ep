@@ -6,7 +6,7 @@ import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.exceptions.ProductNotInDispensingException;
 import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;

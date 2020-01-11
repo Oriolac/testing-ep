@@ -1,6 +1,6 @@
 package cat.udl.ep.data;
 
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 
 final public class ProductID {
     private final String productCode;
