@@ -6,13 +6,12 @@ import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.FormatErrorException;
-import cat.udl.ep.pharmacy.Dispensing;
-import cat.udl.ep.pharmacy.MedicineDispensingLine;
-import cat.udl.ep.pharmacy.ProductSpecification;
-import cat.udl.ep.pharmacy.Sale;
+import cat.udl.ep.pharmacy.*;
 import cat.udl.ep.pharmacy.exceptions.*;
 import cat.udl.ep.services.HealthCardReader;
 import cat.udl.ep.services.NationalHealthService;
+import cat.udl.ep.services.SalesHistory;
+import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.services.exceptions.HealthCardException;
 import cat.udl.ep.services.exceptions.ProductIDException;
 import org.junit.jupiter.api.BeforeEach;
@@ -95,7 +94,7 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
         ePrescription.setCompleted();
         assertTrue(ePrescription.isCompleted());
 
-        DispensingTerminal dt = new DispensingTerminal(new SNS(), new HCR());
+        DispensingTerminal dt = new DispensingTerminal(new SNS(), new HCR(), new SalesHistoryDB(), new WarehouseDB());
         ePrescription.setDispensingTerminal(dt);
 
         ePrescription.setSale(new Sale(dt, ePrescription));
@@ -133,6 +132,24 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
         @Override
         public HealthCardID getHealthCardID() {
             return null;
+        }
+    }
+
+    static class WarehouseDB implements Warehouse {
+
+        public WarehouseDB() {}
+
+        @Override
+        public void updateStock(List<ProductSaleLine> listOfProducts) throws InsuficientExistencies {
+
+        }
+    }
+
+    static class SalesHistoryDB implements SalesHistory {
+
+        @Override
+        public void registerSale(Sale sale) {
+
         }
     }
 }
