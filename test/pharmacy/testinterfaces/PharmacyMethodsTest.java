@@ -1,6 +1,7 @@
 package pharmacy.testinterfaces;
 
 import cat.udl.ep.data.exceptions.FormatErrorException;
+import cat.udl.ep.pharmacy.exceptions.DispensingException;
 import cat.udl.ep.services.exceptions.ProductIDException;
 import org.junit.jupiter.api.Test;
 
@@ -18,5 +19,5 @@ public interface PharmacyMethodsTest {
     void gettersTest() throws ProductIDException;
 
     @Test
-    void settersTest() throws FormatErrorException;
+    void settersTest() throws FormatErrorException, ProductIDException, DispensingException;
 }

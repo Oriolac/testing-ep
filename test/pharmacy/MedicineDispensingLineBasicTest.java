@@ -25,8 +25,7 @@ public class MedicineDispensingLineBasicTest implements PharmacyMethodsTest {
 
     private MedicineDispensingLine medicineDispensingLine(String code, String description, BigDecimal bigDecimal) throws ProductIDException {
         prodSpec = new ProductSpecification(new ProductID(code),description, bigDecimal);
-        dispensableMedicines = new DispensableMedicines();
-        ePrescription = new Dispensing(new Date(), new Date(), dispensableMedicines);
+        ePrescription = new Dispensing(new Date(), new Date());
         return new MedicineDispensingLine(ePrescription, prodSpec);
     }
 
