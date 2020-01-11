@@ -1,11 +1,12 @@
 package cat.udl.ep.data;
 
 import cat.udl.ep.data.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.PatientIDException;
 
 final public class HealthCardID {
     private final String personalID;
 
-    public HealthCardID(String code) throws NullPointerException, HealthCardException {
+    public HealthCardID(String code) throws NullPointerException, PatientIDException {
         if (code == null) {
             throw new NullPointerException("Rebut objecte sense instanciar.");
         }
@@ -13,7 +14,7 @@ final public class HealthCardID {
         if (isValidCIP(code)) {
             this.personalID = code;
         } else {
-            throw new HealthCardException("Error amb el format del CIP.");
+            throw new PatientIDException("Error amb el format del CIP.");
         }
     }
 

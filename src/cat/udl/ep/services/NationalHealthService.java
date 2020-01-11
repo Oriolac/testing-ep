@@ -12,6 +12,7 @@ import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.ProductSpecification;
 import cat.udl.ep.data.exceptions.HealthCardException;
 import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
+import cat.udl.ep.services.exceptions.ProductNotFoundException;
 
 import java.net.ConnectException;
 import java.util.List;
@@ -22,7 +23,7 @@ public interface NationalHealthService {
 
     PatientContr getPatientContr(HealthCardID hcID) throws ConnectException;
 
-    ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException;
+    ProductSpecification getProductSpecific(ProductID pID) throws ProductNotFoundException, ConnectException;
 
     List<Dispensing> updateePrescription(HealthCardID hcID, Dispensing disp) throws ConnectException;
 }
