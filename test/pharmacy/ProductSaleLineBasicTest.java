@@ -103,7 +103,7 @@ public class ProductSaleLineBasicTest implements PharmacyMethodsTest {
         }
 
         public void setVoidePrescription(){
-            ePrescription = new Dispensing(new Date(), new Date(), new DispensableMedicines());
+            ePrescription = new Dispensing(new Date(), new Date());
         }
 
         public void putDispensingMedicine(ProductID productID, MedicineDispensingLine medicineDispensingLine){
