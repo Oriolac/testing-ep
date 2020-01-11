@@ -2,6 +2,7 @@ package cat.udl.ep.pharmacy;
 
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.PatientContr;
+import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.exceptions.ProductNotInDispensingException;
 import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
@@ -25,6 +26,7 @@ public class Sale implements SaleInt {
     private List<ProductSaleLine> productSaleLines;
     private final Dispensing ePrescription;
     private DispensingTerminal dispensingTerminal;
+    private Payment payment;
 
     public Sale(DispensingTerminal dispensingTerminal, Dispensing ePrescription) {
         saleCode = hashCode();
@@ -34,6 +36,7 @@ public class Sale implements SaleInt {
         productSaleLines = new ArrayList<>();
         this.ePrescription = ePrescription;
         this.dispensingTerminal = dispensingTerminal;
+        payment = null;
     }
 
     public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException, ProductIDException, ConnectException {
@@ -107,6 +110,14 @@ public class Sale implements SaleInt {
 
     public ProductSpecification getProductSpec(ProductID prodID) {
         return ePrescription.getProductSpec(prodID);
+    }
+
+    public Payment getPayment() {
+        return this.payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
 }

@@ -1,7 +1,11 @@
 package cat.udl.ep;
 
+import cat.udl.ep.data.CashPayment;
+import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.exceptions.*;
+import cat.udl.ep.services.SalesHistory;
+import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.services.exceptions.*;
 import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.ProductSpecification;
@@ -23,10 +27,14 @@ public class DispensingTerminal {
     private Dispensing ePrescription;
     private NationalHealthService SNS;
     private HealthCardReader HCR;
+    private SalesHistory salesHistory;
+    private Warehouse warehouse;
 
-    public DispensingTerminal(NationalHealthService SNS, HealthCardReader HCR) {
+    public DispensingTerminal(NationalHealthService SNS, HealthCardReader HCR, SalesHistory salesHistory, Warehouse warehouse) {
         this.SNS = SNS;
         this.HCR = HCR;
+        this.salesHistory = salesHistory;
+        this.warehouse = warehouse;
     }
 
     public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
@@ -61,21 +69,15 @@ public class DispensingTerminal {
         sale.calculateFinalAmount();
     }
 
-    public void realizePayment(BigDecimal quantity) throws QuantityMinorThanImport, SaleNotClosedException {
+    public void realizePayment(BigDecimal quantity) throws ConnectException, QuantityMinorThanImport, InsuficientExistencies, SaleNotClosedException, HealthCardException {
         if (!sale.isClosed())
             throw new SaleNotClosedException("La venda no està tancada.");
-        BigDecimal amount = sale.getAmount();
-        if(amount.compareTo(quantity) < 0)
-            throw new QuantityMinorThanImport("La quantitat és menor que l'import a pagar.");
-        //TODO: S'ha d'acabar de fer a la part opcional!!
-    }
-
-    public void realizePayment(float quantity)  {
-        try {
-            throw new NotImplementedException();
-        } catch (NotImplementedException e) {
-            e.printStackTrace();
-        }
+        Payment payment = new CashPayment(sale.getAmount(), quantity);
+        payment.setSale(sale);
+        sale.setPayment(payment);
+        warehouse.updateStock(sale.getProductSaleLines());
+        salesHistory.registerSale(sale);
+        SNS.updateePrescription(HCR.getHealthCardID(), ePrescription);
     }
 
     public void printNextDispensingSheet() {
