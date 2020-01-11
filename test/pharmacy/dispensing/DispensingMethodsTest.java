@@ -1,4 +1,4 @@
-package pharmacy;
+package pharmacy.dispensing;
 
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.DispensableMedicines;
