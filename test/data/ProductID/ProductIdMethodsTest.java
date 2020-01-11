@@ -1,8 +1,7 @@
 package data.ProductID;
 
 import cat.udl.ep.data.ProductID;
-import cat.udl.ep.data.exceptions.FormatErrorException;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 import data.testInterfaces.DataMethodsTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

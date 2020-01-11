@@ -3,6 +3,8 @@ package cat.udl.ep;
 import cat.udl.ep.data.CashPayment;
 import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.data.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 import cat.udl.ep.pharmacy.exceptions.*;
 import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
@@ -37,7 +39,7 @@ public class DispensingTerminal {
         this.warehouse = warehouse;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
+    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException {
         switch (option){
             case BY_HEALTHCARDID:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());

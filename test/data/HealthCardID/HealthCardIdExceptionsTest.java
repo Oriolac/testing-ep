@@ -1,7 +1,7 @@
 package data.HealthCardID;
 
 import cat.udl.ep.data.HealthCardID;
-import cat.udl.ep.services.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.HealthCardException;
 import data.testInterfaces.DataExceptionsTest;
 import data.testInterfaces.NullInterfaceTest;
 import org.junit.jupiter.api.Test;

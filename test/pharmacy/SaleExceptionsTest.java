@@ -10,8 +10,8 @@ import cat.udl.ep.pharmacy.Sale;
 import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
 import cat.udl.ep.pharmacy.exceptions.ProductNotInDispensingException;
 import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
-import cat.udl.ep.services.exceptions.HealthCardException;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.data.exceptions.HealthCardException;
+import cat.udl.ep.data.exceptions.ProductIDException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
