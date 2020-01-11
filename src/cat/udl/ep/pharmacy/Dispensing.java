@@ -101,6 +101,10 @@ public class Dispensing {
         this.dispensingTerminal = dispensingTerminal;
     }
 
+    public void setMedicineDispensingLines(DispensableMedicines medicineDispensingLines) {
+        this.medicineDispensingLines = medicineDispensingLines;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof Dispensing)){
