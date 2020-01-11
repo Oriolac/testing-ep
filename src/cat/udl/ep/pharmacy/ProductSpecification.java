@@ -22,7 +22,7 @@ public class ProductSpecification {
     }
 
     public boolean equals(ProductSpecification productSpec) {
-        return prodID.equals(productSpec.getProdID()) && description==productSpec.description && price.equals(productSpec.getPrice());
+        return prodID.equals(productSpec.getProdID()) && description.equals(productSpec.description) && price.equals(productSpec.getPrice());
     }
 
     public BigDecimal getPrice() {
