@@ -57,7 +57,7 @@ public class DispensingTerminal {
         sale = new Sale(this, ePrescription);
     }
 
-    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductIDException, HealthCardException, ProductNotInDispensingException {
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, ProductIDException, HealthCardException, ProductNotInDispensingException, DispensingException {
         ProductSpecification productSpecification = getProductSpec(pID);
         sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
         ePrescription.setProductAsDispensed(pID);
