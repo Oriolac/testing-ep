@@ -81,8 +81,7 @@ public class ProductSpecificationTest implements PharmacyMethodsTest {
 
     @Override
     public void settersTest() throws FormatErrorException {
-        DispensableMedicines dispensableMedicines = new DispensableMedicines();
-        Dispensing ePrescription = new Dispensing(new Date(), new Date(), dispensableMedicines);
+        Dispensing ePrescription = new Dispensing(new Date(), new Date());
         MedicineDispensingLine medicineDispensingLine = new MedicineDispensingLine(ePrescription, productSpecification);
         ePrescription.getDispensableMedicines().put(productID, medicineDispensingLine);
         productSpecification.setMedDispensingLine(medicineDispensingLine);
@@ -107,7 +106,7 @@ public class ProductSpecificationTest implements PharmacyMethodsTest {
         }
 
         public void setVoidePrescription(){
-            ePrescription = new Dispensing(new Date(), new Date(), new DispensableMedicines());
+            ePrescription = new Dispensing(new Date(), new Date());
         }
 
         public void putDispensingMedicine(ProductID productID, MedicineDispensingLine medicineDispensingLine){

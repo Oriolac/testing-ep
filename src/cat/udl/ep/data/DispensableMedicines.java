@@ -2,7 +2,9 @@ package cat.udl.ep.data;
 
 import cat.udl.ep.pharmacy.MedicineDispensingLine;
 
+
 import java.util.*;
+
 
 public class DispensableMedicines {
     private HashMap<ProductID, MedicineDispensingLine> medicineDispensingLines;
@@ -27,4 +29,8 @@ public class DispensableMedicines {
         return medicineDispensingLines;
     }
 
+
+    public boolean allMatch(Predicate<? super MedicineDispensingLine> action) {
+        return medicineDispensingLines.values().parallelStream().allMatch(action);
+    }
 }

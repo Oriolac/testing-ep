@@ -3,13 +3,14 @@ package cat.udl.ep.pharmacy;
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.pharmacy.exceptions.CompletedDispensingException;
+import cat.udl.ep.pharmacy.exceptions.DispensingException;
 import cat.udl.ep.pharmacy.exceptions.DispensingNotAvailableException;
-import cat.udl.ep.services.exceptions.ProductIDException;
+import cat.udl.ep.pharmacy.exceptions.AcquiredMedicineDispensingLineException;
 
-import java.net.ConnectException;
 import java.time.Instant;
+import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 
 public class Dispensing {
     /**
@@ -23,7 +24,12 @@ public class Dispensing {
     private DispensingTerminal dispensingTerminal;
 
     public Dispensing(Date initDate, Date finalDate) {
-        this((byte) 0, initDate, finalDate, null);
+        this((byte) 0, initDate, finalDate, new DispensableMedicines());
+        this.nOrder = (byte) hashCode();
+    }
+
+    public Dispensing(byte nOrder, Date initDate, Date finalDate) {
+        this((byte) 0, initDate, finalDate, new DispensableMedicines());
         this.nOrder = (byte) hashCode();
     }
 
@@ -49,10 +55,16 @@ public class Dispensing {
         }
     }
 
-    public void setProductAsDispensed(ProductID prodID) {
+    public void setProductAsDispensed(ProductID prodID) throws DispensingException {
+        if (dispensingEnabled() && isCompleted())
+            throw new CompletedDispensingException();
         MedicineDispensingLine medDispensingLine = medicineDispensingLines.get(prodID);
+        if (medDispensingLine.isAcquired())
+            throw new AcquiredMedicineDispensingLineException();
         medDispensingLine.setAcquired();
         medicineDispensingLines.put(prodID, medDispensingLine);
+        if(medicineDispensingLines.allMatch(MedicineDispensingLine::isAcquired))
+            setCompleted();
     }
 
     public Date getInitDate() {
