@@ -6,6 +6,7 @@ import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.FormatErrorException;
+import cat.udl.ep.data.exceptions.PatientIDException;
 import cat.udl.ep.pharmacy.*;
 import cat.udl.ep.pharmacy.exceptions.InsuficientExistencies;
 import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
@@ -17,6 +18,7 @@ import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.services.exceptions.HealthCardException;
 import cat.udl.ep.data.exceptions.ProductIDException;
+import cat.udl.ep.services.exceptions.ProductNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +37,7 @@ public class SaleMethodsTest {
     private DispensingTerminal dispensingTerminal;
 
     @BeforeEach
-    public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException {
+    public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException, PatientIDException {
         SNS sns = new SNS();
         HCR hcr = new HCR();
         Warehouse wh = new WarehouseDB();
@@ -46,7 +48,7 @@ public class SaleMethodsTest {
     }
 
     @Test
-    public void addLineTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, HealthCardException {
+    public void addLineTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, PatientIDException {
         List<ProductSaleLine> expProductSaleLines = new ArrayList<>();
 
         ProductID prod1 = new ProductID("111111111111");
@@ -75,7 +77,7 @@ public class SaleMethodsTest {
     }
 
     @Test
-    public void calculateFinalAmountTest() throws SaleClosedException, ProductIDException, ConnectException, ProductNotInDispensingException, HealthCardException {
+    public void calculateFinalAmountTest() throws SaleClosedException, ProductIDException, ConnectException, ProductNotInDispensingException, PatientIDException {
         PatientContr contr = sale.getDispensingTerminal().getSNS().getPatientContr(new HealthCardID("ZZZZ473298320193"));;
         sale.addLine(new ProductID("111111111111"), new BigDecimal("9.99"), contr);
         sale.addLine(new ProductID("222222222222"), new BigDecimal("10.0"), contr);
@@ -90,8 +92,8 @@ public class SaleMethodsTest {
     }
 
     @Test
-    public void isClosedTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, HealthCardException {
-        PatientContr contr = sale.getDispensingTerminal().getSNS().getPatientContr(new HealthCardID("ZZZZ473298320193"));;
+    public void isClosedTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, PatientIDException {
+        PatientContr contr = sale.getDispensingTerminal().getSNS().getPatientContr(new HealthCardID("ZZZZ473298320193"));
         sale.addLine(new ProductID("111111111111"), new BigDecimal("9.99"), contr);
         sale.addLine(new ProductID("222222222222"), new BigDecimal("10.0"), contr);
         assertTrue(!sale.isClosed());
@@ -157,7 +159,7 @@ public class SaleMethodsTest {
         }
 
         @Override
-        public ProductSpecification getProductSpecific(ProductID pID) throws ProductIDException, ConnectException {
+        public ProductSpecification getProductSpecific(ProductID pID) throws ProductNotFoundException, ConnectException {
             return null;
         }
 

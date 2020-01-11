@@ -5,6 +5,7 @@ import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.FormatErrorException;
+import cat.udl.ep.data.exceptions.PatientIDException;
 import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.Sale;
 import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
@@ -27,7 +28,7 @@ public class SaleExceptionsTest {
     private DispensingTerminal dispensingTerminal;
 
     @BeforeEach
-    public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException {
+    public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException, PatientIDException {
         SaleMethodsTest.SNS sns = new SaleMethodsTest.SNS();
         SaleMethodsTest.HCR hcr = new SaleMethodsTest.HCR();
         SaleMethodsTest.SalesHistoryDB sh = new SaleMethodsTest.SalesHistoryDB();
