@@ -23,9 +23,6 @@ final public class PatientContr {
     public BigDecimal getPatCont() { return patCont; }
 
     @Override
-    public int hashCode() { return patCont.hashCode(); }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

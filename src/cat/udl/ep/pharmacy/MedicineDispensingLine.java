@@ -37,7 +37,7 @@ public class MedicineDispensingLine {
     }
 
     public boolean equals(MedicineDispensingLine medicineDispensingLine) {
-        return ePrescription==medicineDispensingLine.getePrescription() && acquired==medicineDispensingLine.isAcquired()
+        return ePrescription.equals(medicineDispensingLine.getePrescription()) && acquired==medicineDispensingLine.isAcquired()
                 && productSpec.equals(medicineDispensingLine.getProductSpec());
     }
 

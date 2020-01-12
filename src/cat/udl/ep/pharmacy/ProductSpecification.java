@@ -17,8 +17,14 @@ public class ProductSpecification {
         this.price = price;
     }
 
-    public boolean equals(ProductSpecification productSpec) {
-        return prodID.equals(productSpec.getProdID()) && description.equals(productSpec.description) && price.equals(productSpec.getPrice());
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ProductSpecification))
+            return false;
+        ProductSpecification productSpec = (ProductSpecification) obj;
+        return prodID.equals(productSpec.getProdID()) &&
+                description.equals(productSpec.description) &&
+                price.floatValue() == productSpec.getPrice().floatValue();
     }
 
     public BigDecimal getPrice() {

@@ -1,9 +1,8 @@
-package dispensing_terminal_test;
+package dispensing_terminal_test.methods.Doubles;
 
 import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.exceptions.PatientIDException;
 import cat.udl.ep.services.HealthCardReader;
-import cat.udl.ep.services.exceptions.HealthCardException;
 
 public class HealthCardReaderDB implements HealthCardReader {
     @Override

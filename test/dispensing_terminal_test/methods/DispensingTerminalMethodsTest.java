@@ -1,24 +1,26 @@
-package dispensing_terminal_test;
+package dispensing_terminal_test.methods;
 
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.IDException;
 import cat.udl.ep.data.exceptions.PatientIDException;
-import cat.udl.ep.data.exceptions.ProductIDException;
-import cat.udl.ep.pharmacy.Sale;
 import cat.udl.ep.pharmacy.exceptions.*;
 import cat.udl.ep.services.HealthCardReader;
 import cat.udl.ep.services.NationalHealthService;
 import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.services.exceptions.*;
+import dispensing_terminal_test.methods.Doubles.HealthCardReaderDB;
+import dispensing_terminal_test.methods.Doubles.SNS;
+import dispensing_terminal_test.methods.Doubles.SalesHistoryDB;
+import dispensing_terminal_test.methods.Doubles.WarehouseDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DispensingTerminalMethodsTest {
     private DispensingTerminal dispensingTerminal;
@@ -35,7 +37,7 @@ public class DispensingTerminalMethodsTest {
     @Test
     public void getePrescriptionTest() throws NotValidePrescriptionException, HealthCardException, ConnectException, PatientIDException {
         dispensingTerminal.getePrescription('i');
-        assertTrue(dispensingTerminal.getePrescription().getDispensingTerminal().equals(dispensingTerminal));
+        assertEquals(dispensingTerminal.getePrescription().getDispensingTerminal(), dispensingTerminal);
     }
 
     @Test
@@ -43,26 +45,26 @@ public class DispensingTerminalMethodsTest {
         dispensingTerminal.getePrescription('i');
         dispensingTerminal.initNewSale();
 
-        assertTrue(dispensingTerminal.getSale().getDispensingTerminal().equals(dispensingTerminal));
-        assertTrue(dispensingTerminal.getSale().getePrescription().equals(dispensingTerminal.getePrescription()));
+        assertEquals(dispensingTerminal.getSale().getDispensingTerminal(), dispensingTerminal);
+        assertEquals(dispensingTerminal.getSale().getePrescription(), dispensingTerminal.getePrescription());
     }
 
     @Test
-    public void enterProductTest() throws NotValidePrescriptionException, IDException, ConnectException, DispensingException, ProductNotFoundException, ProductNotInDispensingException, SaleClosedException {
+    public void enterProductTest() throws NotValidePrescriptionException, IDException, ConnectException, DispensingException, ProductNotFoundException, ProductNotInDispensingException, SaleClosedException, HealthCardException {
         dispensingTerminal.getePrescription('i');
         dispensingTerminal.initNewSale();
         ProductID prod1 = new ProductID("111111111111");
         dispensingTerminal.enterProduct(prod1);
-        assertTrue(dispensingTerminal.getSale().getProductSaleLine(prod1).getSale().equals(dispensingTerminal.getSale()));
-        assertTrue(dispensingTerminal.getSale().getProductSaleLine(prod1).getProductSpec().equals(dispensingTerminal.getProductSpec(prod1)));
+        assertEquals(dispensingTerminal.getSale().getProductSaleLine(prod1).getSale(), dispensingTerminal.getSale());
+        assertEquals(dispensingTerminal.getSale().getProductSaleLine(prod1).getProductSpec(), dispensingTerminal.getProductSpec(prod1));
         assertTrue(dispensingTerminal.getSale().getProductSaleLine(prod1).getMedDispensingLine().equals(dispensingTerminal.getePrescription().getMedicineDispensingLine(prod1)));
         BigDecimal subtotal = dispensingTerminal.getProductSpec(prod1).getPrice().multiply(dispensingTerminal.getSNS().getPatientContr(dispensingTerminal.getHCR().getHealthCardID()).getPatCont());
-        assertTrue(dispensingTerminal.getSale().getProductSaleLine(prod1).getSubtotal().equals(subtotal));
+        assertEquals(dispensingTerminal.getSale().getProductSaleLine(prod1).getSubtotal(), subtotal);
         assertTrue(dispensingTerminal.getePrescription().getMedicineDispensingLine(prod1).isAcquired());
     }
 
     @Test
-    public void finalizeSaleDispensingNotCompleted() throws NotValidePrescriptionException, IDException, ConnectException, DispensingException, ProductNotFoundException, ProductNotInDispensingException, SaleClosedException, SaleNotInitiatedException {
+    public void finalizeSaleDispensingNotCompleted() throws NotValidePrescriptionException, IDException, ConnectException, DispensingException, ProductNotFoundException, ProductNotInDispensingException, SaleClosedException, SaleNotInitiatedException, HealthCardException {
         dispensingTerminal.getePrescription('i');
         dispensingTerminal.initNewSale();
         ProductID prod1 = new ProductID("111111111111");
@@ -71,12 +73,12 @@ public class DispensingTerminalMethodsTest {
         assertTrue(dispensingTerminal.getSale().isClosed());
         BigDecimal result = dispensingTerminal.getProductSpec(prod1).getPrice().multiply(new BigDecimal("0.5"));
         result = result.add(result.multiply(new BigDecimal("0.21")));
-        assertTrue(dispensingTerminal.getSale().getAmount().equals(result));
-        assertTrue(!dispensingTerminal.getePrescription().isCompleted());
+        assertEquals(dispensingTerminal.getSale().getAmount(), result);
+        assertFalse(dispensingTerminal.getePrescription().isCompleted());
     }
 
     @Test
-    public void finalizeSaleDispensingCompleted() throws NotValidePrescriptionException, IDException, ConnectException, DispensingException, ProductNotFoundException, ProductNotInDispensingException, SaleClosedException, SaleNotInitiatedException {
+    public void finalizeSaleDispensingCompleted() throws NotValidePrescriptionException, IDException, ConnectException, DispensingException, ProductNotFoundException, ProductNotInDispensingException, SaleClosedException, SaleNotInitiatedException, HealthCardException {
         dispensingTerminal.getePrescription('i');
         dispensingTerminal.initNewSale();
         ProductID prod1 = new ProductID("111111111111");
@@ -90,7 +92,7 @@ public class DispensingTerminalMethodsTest {
     }
 
     @Test
-    public void realizePaymentTest() throws NotValidePrescriptionException, IDException, ConnectException, ProductNotFoundException, DispensingException, ProductNotInDispensingException, SaleClosedException, SaleNotInitiatedException, InsuficientExistencies, QuantityMinorThanImport, SaleNotClosedException {
+    public void realizePaymentTest() throws NotValidePrescriptionException, IDException, ConnectException, ProductNotFoundException, DispensingException, ProductNotInDispensingException, SaleClosedException, SaleNotInitiatedException, InsuficientExistencies, QuantityMinorThanImport, SaleNotClosedException, HealthCardException {
         dispensingTerminal.getePrescription('i');
         dispensingTerminal.initNewSale();
         ProductID prod1 = new ProductID("111111111111");
@@ -98,11 +100,16 @@ public class DispensingTerminalMethodsTest {
         dispensingTerminal.finalizeSale();
         BigDecimal quantity = new BigDecimal("20.0");
         dispensingTerminal.realizePayment(quantity);
-        assertTrue(dispensingTerminal.getSale().getPayment().getImport().equals(dispensingTerminal.getSale().getAmount()));
+
+        assertEquals(dispensingTerminal.getSale().getPayment().getImport(), dispensingTerminal.getSale().getAmount());
         BigDecimal change = quantity.subtract(dispensingTerminal.getSale().getAmount());
-        assertTrue(change.equals(dispensingTerminal.getSale().getPayment().getChange()));
-        assertTrue(dispensingTerminal.getSale().getPayment().getSale().equals(dispensingTerminal.getSale()));
+        assertEquals(change, dispensingTerminal.getSale().getPayment().getChange());
+        assertEquals(dispensingTerminal.getSale().getPayment().getSale(), dispensingTerminal.getSale());
+
+        assertEquals(dispensingTerminal.getSale(), dispensingTerminal.getSalesHistory().getSale(dispensingTerminal.getSale().getSaleCode()));
+        assertThrows(NotValidePrescriptionException.class, () -> dispensingTerminal.getePrescription('i'));
     }
+
 
 
 }

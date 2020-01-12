@@ -1,4 +1,4 @@
-package pharmacy;
+package pharmacy.Sale;
 
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.DispensableMedicines;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class SaleMethodsTest {
 
@@ -37,7 +37,7 @@ public class SaleMethodsTest {
     private DispensingTerminal dispensingTerminal;
 
     @BeforeEach
-    public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException, PatientIDException {
+    public void initSale() throws PatientIDException {
         SNS sns = new SNS();
         HCR hcr = new HCR();
         Warehouse wh = new WarehouseDB();
@@ -48,7 +48,7 @@ public class SaleMethodsTest {
     }
 
     @Test
-    public void addLineTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, PatientIDException {
+    public void addLineTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, PatientIDException, HealthCardException {
         List<ProductSaleLine> expProductSaleLines = new ArrayList<>();
 
         ProductID prod1 = new ProductID("111111111111");
@@ -73,12 +73,12 @@ public class SaleMethodsTest {
         ProductID prod1 = new ProductID("111111111111");
         ProductID prod3 = new ProductID("333333333333");
         assertTrue(sale.isDispensable(prod1));
-        assertTrue(!sale.isDispensable(prod3));
+        assertFalse(sale.isDispensable(prod3));
     }
 
     @Test
-    public void calculateFinalAmountTest() throws SaleClosedException, ProductIDException, ConnectException, ProductNotInDispensingException, PatientIDException {
-        PatientContr contr = sale.getDispensingTerminal().getSNS().getPatientContr(new HealthCardID("ZZZZ473298320193"));;
+    public void calculateFinalAmountTest() throws SaleClosedException, ProductIDException, ConnectException, ProductNotInDispensingException, PatientIDException, HealthCardException {
+        PatientContr contr = sale.getDispensingTerminal().getSNS().getPatientContr(new HealthCardID("ZZZZ473298320193"));
         sale.addLine(new ProductID("111111111111"), new BigDecimal("9.99"), contr);
         sale.addLine(new ProductID("222222222222"), new BigDecimal("10.0"), contr);
         sale.calculateFinalAmount();
@@ -88,23 +88,23 @@ public class SaleMethodsTest {
         BigDecimal expFinalAmount = price1.multiply(contr.getPatCont()).add(price2.multiply(contr.getPatCont()));
         expFinalAmount = expFinalAmount.add(expFinalAmount.multiply(new BigDecimal("0.21")));
 
-        assertTrue(expFinalAmount.compareTo(sale.getAmount())==0);
+        assertEquals(0, expFinalAmount.compareTo(sale.getAmount()));
     }
 
     @Test
-    public void isClosedTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, PatientIDException {
+    public void isClosedTest() throws ProductIDException, SaleClosedException, ProductNotInDispensingException, ConnectException, PatientIDException, HealthCardException {
         PatientContr contr = sale.getDispensingTerminal().getSNS().getPatientContr(new HealthCardID("ZZZZ473298320193"));
         sale.addLine(new ProductID("111111111111"), new BigDecimal("9.99"), contr);
         sale.addLine(new ProductID("222222222222"), new BigDecimal("10.0"), contr);
-        assertTrue(!sale.isClosed());
+        assertFalse(sale.isClosed());
         sale.calculateFinalAmount();
         assertTrue(sale.isClosed());
     }
 
     @Test
     public void gettersTest() {
-        assertTrue(sale.hashCode()==sale.getSaleCode());
-        assertTrue(dispensingTerminal.equals(sale.getDispensingTerminal()));
+        assertEquals(sale.hashCode(), sale.getSaleCode());
+        assertEquals(dispensingTerminal, sale.getDispensingTerminal());
     }
 
     private boolean equals(List<ProductSaleLine> productSaleLines1, List<ProductSaleLine> productSaleLines2) {
@@ -138,7 +138,7 @@ public class SaleMethodsTest {
     static class SNS implements NationalHealthService {
 
         @Override
-        public Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException {
+        public Dispensing getePrescription(HealthCardID hcID) {
             try {
                 DispensableMedicines dispensableMedicines = initDispensableMedicines();
                 return new Dispensing(new Date(), new Date(), dispensableMedicines);
@@ -149,7 +149,7 @@ public class SaleMethodsTest {
         }
 
         @Override
-        public PatientContr getPatientContr(HealthCardID hcID) throws ConnectException {
+        public PatientContr getPatientContr(HealthCardID hcID) {
             try {
                 return new PatientContr(new BigDecimal("0.5"));
             } catch (FormatErrorException e) {
@@ -159,12 +159,12 @@ public class SaleMethodsTest {
         }
 
         @Override
-        public ProductSpecification getProductSpecific(ProductID pID) throws ProductNotFoundException, ConnectException {
+        public ProductSpecification getProductSpecific(ProductID pID) {
             return null;
         }
 
         @Override
-        public List<Dispensing> updateePrescription(HealthCardID hcID, Dispensing disp) throws ConnectException {
+        public List<Dispensing> updateePrescription(HealthCardID hcID, Dispensing disp) {
             return null;
         }
     }
@@ -174,7 +174,7 @@ public class SaleMethodsTest {
         public HCR() {}
 
         @Override
-        public HealthCardID getHealthCardID() throws PatientIDException {
+        public HealthCardID getHealthCardID() {
             return null;
         }
     }
@@ -184,7 +184,7 @@ public class SaleMethodsTest {
         public WarehouseDB() {}
 
         @Override
-        public void updateStock(List<ProductSaleLine> listOfProducts) throws InsuficientExistencies {
+        public void updateStock(List<ProductSaleLine> listOfProducts) {
 
         }
     }
@@ -192,8 +192,13 @@ public class SaleMethodsTest {
     static class SalesHistoryDB implements SalesHistory {
 
         @Override
-        public void registerSale(Sale sale) {
+        public void registerSale(SaleInt sale) {
 
+        }
+
+        @Override
+        public SaleInt getSale(int SaleCode) {
+            return null;
         }
     }
 }

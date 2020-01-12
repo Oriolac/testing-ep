@@ -1,4 +1,4 @@
-package pharmacy.dispensing;
+package pharmacy.Dispensing;
 
 import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.ProductID;
