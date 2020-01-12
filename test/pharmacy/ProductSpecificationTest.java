@@ -57,19 +57,21 @@ public class ProductSpecificationTest implements PharmacyMethodsTest {
     }
 
     @Override
+    @Test
     public void equalsTest() throws ProductIDException {
         ProductSpecification productSpecification2 = getProductSpecification("123456789154", "Medicament pel mal de cap",
-                new BigDecimal("5.0"));
+                new BigDecimal("0.5"));
         assertEquals(productSpecification, productSpecification2);
     }
 
     @Override
+    @Test
     public void notEqualsTest() throws ProductIDException {
         ProductSpecification productSpecification2 = getProductSpecification("123456789123", "Medicament pel mal de cap",
-                new BigDecimal("5.0"));
+                new BigDecimal("0.5"));
         assertNotEquals(productSpecification, productSpecification2);
         productSpecification2 = getProductSpecification("123456789154", "Medicament pel mal de coll",
-                new BigDecimal("5.0"));
+                new BigDecimal("0.5"));
         assertNotEquals(productSpecification, productSpecification2);
         productSpecification2 = getProductSpecification("123456789154", "Medicament pel mal de cap",
                 new BigDecimal("4.99"));
@@ -77,13 +79,18 @@ public class ProductSpecificationTest implements PharmacyMethodsTest {
     }
 
     @Override
+    @Test
     public void gettersTest() throws ProductIDException {
-        assertEquals(new BigDecimal("5.0"), productSpecification.getPrice());
+        assertEquals(new BigDecimal("0.5"), productSpecification.getPrice());
         assertEquals(new ProductID("123456789154"),productSpecification.getProdID());
         assertEquals("Medicament pel mal de cap", productSpecification.getDescription());
+        assertNull(productSpecification.getMedDispensingLine());
+        assertNull(productSpecification.getProdSaleLine());
+
     }
 
     @Override
+    @Test
     public void settersTest() throws FormatErrorException {
         Dispensing ePrescription = new Dispensing(new Date(), new Date());
         MedicineDispensingLine medicineDispensingLine = new MedicineDispensingLine(ePrescription, productSpecification);
@@ -99,6 +106,7 @@ public class ProductSpecificationTest implements PharmacyMethodsTest {
                 new ProductSaleLine(sale, productSpecification, new BigDecimal("0.5"), patientContr);
         productSpecification.setProdSaleLine(productSaleLine);
         assertEquals(productSaleLine, productSpecification.getProdSaleLine());
+
 
     }
     static class SaleDouble implements SaleInt {

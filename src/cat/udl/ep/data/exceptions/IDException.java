@@ -6,7 +6,4 @@ public abstract class IDException extends FormatErrorException {
         super(message);
     }
 
-    public IDException() {
-        super();
-    }
 }

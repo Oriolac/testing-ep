@@ -30,7 +30,7 @@ public class MedicineDispensingLineBasicTest implements PharmacyMethodsTest {
 
     private MedicineDispensingLine medicineDispensingLine(String code, String description, BigDecimal bigDecimal) throws ProductIDException {
         prodSpec = new ProductSpecification(new ProductID(code),description, bigDecimal);
-        ePrescription = new Dispensing(new Date(), new Date());
+        ePrescription = new Dispensing(Byte.MIN_VALUE, new Date(), new Date());
         return new MedicineDispensingLine(ePrescription, prodSpec);
     }
 
@@ -46,12 +46,14 @@ public class MedicineDispensingLineBasicTest implements PharmacyMethodsTest {
     }
 
     @Override
+    @Test
     public void equalsTest() throws ProductIDException {
         MedicineDispensingLine medDispensingLine2 = medicineDispensingLine("123456789012", "DESCRIPTION", BigDecimal.ONE);
         assertTrue(medDispensingLine.equals(medDispensingLine2));
     }
 
     @Override
+    @Test
     public void notEqualsTest() throws ProductIDException {
         MedicineDispensingLine medDispensingLine2 = medicineDispensingLine("123456789012", "", BigDecimal.ONE);
         assertFalse(medDispensingLine.equals(medDispensingLine2));
@@ -62,12 +64,14 @@ public class MedicineDispensingLineBasicTest implements PharmacyMethodsTest {
     }
 
     @Override
+    @Test
     public void gettersTest() {
         assertEquals(prodSpec, medDispensingLine.getProductSpec());
         assertEquals(ePrescription, medDispensingLine.getePrescription());
     }
 
     @Override
+    @Test
     public void settersTest() throws FormatErrorException {
         medDispensingLine.setAcquired();
         assertTrue(medDispensingLine.isAcquired());
