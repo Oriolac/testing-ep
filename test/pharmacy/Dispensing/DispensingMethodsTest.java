@@ -1,4 +1,4 @@
-package pharmacy.dispensing;
+package pharmacy.Dispensing;
 
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.DispensableMedicines;
@@ -14,6 +14,7 @@ import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.data.exceptions.ProductIDException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pharmacy.testinterfaces.PharmacyMethodsTest;
 
 import java.math.BigDecimal;
@@ -47,7 +48,8 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
     }
 
     @Override
-    public void equalsTest() throws ProductIDException, ConnectException, FormatErrorException {
+    @Test
+    public void equalsTest() {
         Dispensing ePrescriptionSameOrder = getVoidePrescription(0);
         assertEquals(ePrescription, ePrescriptionSameOrder);
 
@@ -59,22 +61,26 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
     }
 
     @Override
-    public void notEqualsTest() throws ProductIDException, ConnectException, FormatErrorException {
+    @Test
+    public void notEqualsTest() {
         Dispensing diffEPrescription = getVoidePrescription(1);
         assertNotEquals(ePrescription, diffEPrescription);
     }
 
     @Override
+    @Test
     public void gettersTest() throws ProductIDException {
 
         assertEquals(Date.from(now.minusSeconds(10L)), ePrescription.getInitDate());
         assertEquals(Date.from(now.plusSeconds(10L)), ePrescription.getFinalDate());
-        assertEquals(dispensableMedicines, ePrescription.getDispensableMedicines());
+        assertEquals(new DispensableMedicines(), ePrescription.getDispensableMedicines());
 
-        ProductID productId = new ProductID("1234567890123");
+        ProductID productId = new ProductID("123456789123");
         ProductSpecification prodS = new ProductSpecification(productId, "DESC", BigDecimal.TEN);
         MedicineDispensingLine medicineDispensingLine = new MedicineDispensingLine(ePrescription, prodS);
+        dispensableMedicines = new DispensableMedicines();
         dispensableMedicines.put(productId, medicineDispensingLine);
+        ePrescription = new Dispensing(Date.from(now.minusSeconds(10L)), Date.from(now.plusSeconds(10L)), dispensableMedicines);
 
         assertEquals(medicineDispensingLine, ePrescription.getMedicineDispensingLine(productId));
         assertEquals(prodS, ePrescription.getProductSpec(productId));
@@ -83,9 +89,16 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
     }
 
     @Override
+    @Test
     public void settersTest() throws ProductIDException, DispensingException {
-        ProductID productId = new ProductID("1234567890123");
-
+        ProductID productId = new ProductID("123456789123");
+        ProductID productID1 = new ProductID("123456789024");
+        dispensableMedicines = new DispensableMedicines();
+        dispensableMedicines.put(productId, new MedicineDispensingLine(ePrescription,
+                new ProductSpecification(productId, "Desc", BigDecimal.TEN)));
+        dispensableMedicines.put(productID1, new MedicineDispensingLine(ePrescription,
+                new ProductSpecification(productID1, "Desc", BigDecimal.TEN)));
+        ePrescription = new Dispensing(Date.from(Instant.now().minusSeconds(10L)), Date.from(Instant.now().plusSeconds(10L)), dispensableMedicines);
         ePrescription.setProductAsDispensed(productId);
         assertTrue(ePrescription.getMedicineDispensingLine(productId).isAcquired());
 
@@ -139,7 +152,7 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
         public WarehouseDB() {}
 
         @Override
-        public void updateStock(List<ProductSaleLine> listOfProducts) throws InsuficientExistencies {
+        public void updateStock(List<ProductSaleLine> listOfProducts) {
 
         }
     }
@@ -147,8 +160,13 @@ public class DispensingMethodsTest implements PharmacyMethodsTest {
     static class SalesHistoryDB implements SalesHistory {
 
         @Override
-        public void registerSale(Sale sale) {
+        public void registerSale(SaleInt sale) {
 
+        }
+
+        @Override
+        public SaleInt getSale(int SaleCode) {
+            return null;
         }
     }
 }

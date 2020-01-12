@@ -29,8 +29,7 @@ public class Dispensing {
     }
 
     public Dispensing(byte nOrder, Date initDate, Date finalDate) {
-        this((byte) 0, initDate, finalDate, new DispensableMedicines());
-        this.nOrder = (byte) hashCode();
+        this(nOrder, initDate, finalDate, new DispensableMedicines());
     }
 
     public Dispensing(Date initDate, Date finalDate, DispensableMedicines medicineDispensingLines) {

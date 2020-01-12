@@ -1,4 +1,4 @@
-package pharmacy;
+package pharmacy.Sale;
 
 import cat.udl.ep.DispensingTerminal;
 import cat.udl.ep.data.HealthCardID;
@@ -28,7 +28,7 @@ public class SaleExceptionsTest {
     private DispensingTerminal dispensingTerminal;
 
     @BeforeEach
-    public void initSale() throws ConnectException, HealthCardException, NotValidePrescriptionException, PatientIDException {
+    public void initSale() throws PatientIDException {
         SaleMethodsTest.SNS sns = new SaleMethodsTest.SNS();
         SaleMethodsTest.HCR hcr = new SaleMethodsTest.HCR();
         SaleMethodsTest.SalesHistoryDB sh = new SaleMethodsTest.SalesHistoryDB();
@@ -48,12 +48,12 @@ public class SaleExceptionsTest {
     @Test
     public void SaleClosedExceptionTest() {
         assertThrows(SaleClosedException.class,
-                () -> closeSaleThenAddLine());
+                this::closeSaleThenAddLine);
         assertThrows(SaleClosedException.class,
-                () -> calculateFinalAmountTwice());
+                this::calculateFinalAmountTwice);
     }
 
-    private void closeSaleThenAddLine() throws SaleClosedException, ProductIDException, FormatErrorException, ConnectException, ProductNotInDispensingException {
+    private void closeSaleThenAddLine() throws SaleClosedException, FormatErrorException, ProductNotInDispensingException {
         sale.calculateFinalAmount();
         sale.addLine(new ProductID("111111111111"), new BigDecimal("10.0"),
                 new PatientContr(new BigDecimal("0.5")));

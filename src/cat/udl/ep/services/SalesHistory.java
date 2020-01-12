@@ -1,7 +1,9 @@
 package cat.udl.ep.services;
 
-import cat.udl.ep.pharmacy.Sale;
+import cat.udl.ep.pharmacy.SaleInt;
 
 public interface SalesHistory {
-    void registerSale(Sale sale);
+    void registerSale(SaleInt sale);
+
+    SaleInt getSale(int SaleCode);
 }

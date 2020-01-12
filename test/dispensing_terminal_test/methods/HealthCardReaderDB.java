@@ -1,4 +1,4 @@
-package dispensing_terminal_test;
+package dispensing_terminal_test.methods;
 
 import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.exceptions.PatientIDException;

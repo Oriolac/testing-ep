@@ -41,7 +41,8 @@ public class Sale implements SaleInt {
         payment = null;
     }
 
-    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException, ProductIDException, ConnectException {
+    @Override
+    public void addLine(ProductID prodID, BigDecimal price, PatientContr contr) throws SaleClosedException, ProductNotInDispensingException {
         if (!isClosed()) {
             if (isDispensable(prodID)) {
                 MedicineDispensingLine medDispensingLine = ePrescription.getMedicineDispensingLine(prodID);
@@ -74,6 +75,7 @@ public class Sale implements SaleInt {
         return ePrescription.getDispensableMedicines().contains(productID);
     }
 
+    @Override
     public void calculateFinalAmount() throws SaleClosedException {
         if (isClosed())
             throw new SaleClosedException("La venta ja està tancada");
@@ -98,6 +100,7 @@ public class Sale implements SaleInt {
         return date;
     }
 
+    @Override
     public int getSaleCode() {
         return saleCode;
     }
@@ -106,10 +109,9 @@ public class Sale implements SaleInt {
         return productSaleLines;
     }
 
+    @Override
     public ProductSaleLine getProductSaleLine(ProductID productID) throws ProductNotFoundException {
-        Iterator<ProductSaleLine> it = productSaleLines.iterator();
-        while(it.hasNext()) {
-            ProductSaleLine productSaleLine = it.next();
+        for (ProductSaleLine productSaleLine : productSaleLines) {
             if (productSaleLine.getProductSpec().getProdID().equals(productID)) {
                 return productSaleLine;
             }
@@ -117,8 +119,10 @@ public class Sale implements SaleInt {
         throw new ProductNotFoundException();
     }
 
+    @Override
     public Dispensing getePrescription() { return ePrescription; }
 
+    @Override
     public DispensingTerminal getDispensingTerminal() { return dispensingTerminal; }
 
     public ProductSpecification getProductSpec(ProductID prodID) {

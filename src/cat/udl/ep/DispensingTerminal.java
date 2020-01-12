@@ -4,6 +4,7 @@ import cat.udl.ep.data.CashPayment;
 import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.PatientIDException;
+import cat.udl.ep.pharmacy.SaleInt;
 import cat.udl.ep.services.exceptions.HealthCardException;
 import cat.udl.ep.data.exceptions.IDException;
 import cat.udl.ep.pharmacy.exceptions.*;
@@ -25,7 +26,7 @@ public class DispensingTerminal {
     final static private char BY_SHEET_TREATMENT = 't';
     final static private char MANUALLY = 'm';
 
-    private Sale sale;
+    private SaleInt sale;
 
     private Dispensing ePrescription;
     private NationalHealthService SNS;
@@ -40,7 +41,7 @@ public class DispensingTerminal {
         this.warehouse = warehouse;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
+    public Dispensing getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
         switch (option){
             case BY_HEALTHCARDID:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
@@ -53,6 +54,7 @@ public class DispensingTerminal {
             default:
                 break;
         }
+        return null;
     }
 
     public void initNewSale() throws DispensingNotAvailableException {
@@ -61,7 +63,7 @@ public class DispensingTerminal {
         sale = new Sale(this, ePrescription);
     }
 
-    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, IDException, DispensingException, ProductNotInDispensingException, ProductNotFoundException {
+    public void enterProduct(ProductID pID) throws SaleClosedException, ConnectException, IDException, DispensingException, ProductNotInDispensingException, ProductNotFoundException, HealthCardException {
         ProductSpecification productSpecification = getProductSpec(pID);
         sale.addLine(pID, productSpecification.getPrice() ,SNS.getPatientContr(HCR.getHealthCardID()));
         ePrescription.setProductAsDispensed(pID);
@@ -73,7 +75,7 @@ public class DispensingTerminal {
         sale.calculateFinalAmount();
     }
 
-    public void realizePayment(BigDecimal quantity) throws ConnectException, QuantityMinorThanImport, InsuficientExistencies, SaleNotClosedException, PatientIDException {
+    public void realizePayment(BigDecimal quantity) throws ConnectException, QuantityMinorThanImport, InsuficientExistencies, SaleNotClosedException, HealthCardException, PatientIDException {
         if (!sale.isClosed())
             throw new SaleNotClosedException("La venda no està tancada.");
         Payment payment = new CashPayment(sale.getAmount(), quantity);
@@ -96,7 +98,7 @@ public class DispensingTerminal {
         return SNS.getProductSpecific(productID);
     }
 
-    public Sale getSale() {
+    public SaleInt getSale() {
         return sale;
     }
 
@@ -111,5 +113,9 @@ public class DispensingTerminal {
     public HealthCardReader getHCR() {
         return HCR;
     }
+
+    public Warehouse getWarehouse() { return warehouse; }
+
+    public SalesHistory getSalesHistory() { return salesHistory; }
 
 }

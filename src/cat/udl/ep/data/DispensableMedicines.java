@@ -34,4 +34,12 @@ public class DispensableMedicines {
     public boolean allMatch(Predicate<? super MedicineDispensingLine> action) {
         return medicineDispensingLines.values().parallelStream().allMatch(action);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof DispensableMedicines))
+            return false;
+        DispensableMedicines o = (DispensableMedicines) obj;
+        return medicineDispensingLines.keySet().stream().allMatch((key) -> o.get(key).equals(medicineDispensingLines.get(key)));
+    }
 }

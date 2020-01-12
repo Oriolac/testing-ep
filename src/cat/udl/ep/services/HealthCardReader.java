@@ -5,5 +5,5 @@ import cat.udl.ep.data.exceptions.PatientIDException;
 import cat.udl.ep.services.exceptions.HealthCardException;
 
 public interface HealthCardReader {
-    HealthCardID getHealthCardID() throws PatientIDException;
+    HealthCardID getHealthCardID() throws HealthCardException, PatientIDException;
 }

@@ -1,7 +1,7 @@
 package cat.udl.ep.services;
 
-/**
- * External service for managing and storing ePrescriptions from population
+/*
+  External service for managing and storing ePrescriptions from population
  */
 
 import cat.udl.ep.data.HealthCardID;
@@ -20,7 +20,7 @@ import java.util.List;
 public interface NationalHealthService {
     Dispensing getePrescription(HealthCardID hcID) throws HealthCardException, NotValidePrescriptionException, ConnectException;
 
-    PatientContr getPatientContr(HealthCardID hcID) throws ConnectException;
+    PatientContr getPatientContr(HealthCardID hcID) throws ConnectException, HealthCardException;
 
     ProductSpecification getProductSpecific(ProductID pID) throws ProductNotFoundException, ConnectException;
 
