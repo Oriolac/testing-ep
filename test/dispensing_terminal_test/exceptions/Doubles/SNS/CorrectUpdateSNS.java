@@ -1,16 +1,13 @@
-package dispensing_terminal_test.exceptions.Doubles.DoubleSNS;
+package dispensing_terminal_test.exceptions.Doubles.SNS;
 
 import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.HealthCardID;
 import cat.udl.ep.data.PatientContr;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.FormatErrorException;
-import cat.udl.ep.data.exceptions.PatientIDException;
-import cat.udl.ep.data.exceptions.ProductIDException;
 import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.MedicineDispensingLine;
 import cat.udl.ep.pharmacy.ProductSpecification;
-import cat.udl.ep.services.exceptions.ProductNotFoundException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;

@@ -1,6 +1,5 @@
-package dispensing_terminal_test.methods;
+package dispensing_terminal_test.methods.Doubles;
 
-import cat.udl.ep.pharmacy.Sale;
 import cat.udl.ep.pharmacy.SaleInt;
 import cat.udl.ep.services.SalesHistory;
 

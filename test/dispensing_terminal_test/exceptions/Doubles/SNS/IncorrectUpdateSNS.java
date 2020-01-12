@@ -1,4 +1,4 @@
-package dispensing_terminal_test.exceptions.Doubles.DoubleSNS;
+package dispensing_terminal_test.exceptions.Doubles.SNS;
 
 import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.HealthCardID;

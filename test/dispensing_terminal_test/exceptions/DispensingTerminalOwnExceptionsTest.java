@@ -1,16 +1,13 @@
 package dispensing_terminal_test.exceptions;
 
 import cat.udl.ep.DispensingTerminal;
-import cat.udl.ep.NotImplementedException;
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.data.exceptions.IDException;
 import cat.udl.ep.data.exceptions.PatientIDException;
-import cat.udl.ep.data.exceptions.ProductIDException;
-import cat.udl.ep.pharmacy.Dispensing;
 import cat.udl.ep.pharmacy.exceptions.*;
 import cat.udl.ep.services.exceptions.*;
-import dispensing_terminal_test.exceptions.Doubles.DoubleSNS.CorrectUpdateSNS;
-import dispensing_terminal_test.exceptions.Doubles.DoubleWarehouse.FiniteWarehouseDB;
+import dispensing_terminal_test.exceptions.Doubles.SNS.CorrectUpdateSNS;
+import dispensing_terminal_test.exceptions.Doubles.Warehouse.FiniteWarehouseDB;
 import dispensing_terminal_test.exceptions.Doubles.HealthCardReaderDB;
 import dispensing_terminal_test.exceptions.Doubles.SalesHistoryDB;
 import org.junit.jupiter.api.BeforeEach;

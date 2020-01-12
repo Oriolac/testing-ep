@@ -1,4 +1,4 @@
-package dispensing_terminal_test.methods;
+package dispensing_terminal_test.methods.Doubles;
 
 import cat.udl.ep.data.DispensableMedicines;
 import cat.udl.ep.data.HealthCardID;
@@ -12,14 +12,11 @@ import cat.udl.ep.pharmacy.ProductSpecification;
 import cat.udl.ep.pharmacy.SaleInt;
 import cat.udl.ep.pharmacy.exceptions.NotValidePrescriptionException;
 import cat.udl.ep.services.NationalHealthService;
-import cat.udl.ep.services.exceptions.HealthCardException;
 import cat.udl.ep.services.exceptions.ProductNotFoundException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;

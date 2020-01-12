@@ -21,7 +21,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ProductSaleLineBasicTest implements PharmacyMethodsTest {
+public class ProductSaleLineTest implements PharmacyMethodsTest {
     private ProductSaleLine productSaleLine;
     ProductSpecification prodSpec;
     SaleInt sale;

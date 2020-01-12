@@ -1,4 +1,4 @@
-package dispensing_terminal_test.exceptions.Doubles.DoubleWarehouse;
+package dispensing_terminal_test.exceptions.Doubles.Warehouse;
 
 import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.ProductSaleLine;

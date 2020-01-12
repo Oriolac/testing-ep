@@ -10,6 +10,10 @@ import cat.udl.ep.services.NationalHealthService;
 import cat.udl.ep.services.SalesHistory;
 import cat.udl.ep.services.Warehouse;
 import cat.udl.ep.services.exceptions.*;
+import dispensing_terminal_test.methods.Doubles.HealthCardReaderDB;
+import dispensing_terminal_test.methods.Doubles.SNS;
+import dispensing_terminal_test.methods.Doubles.SalesHistoryDB;
+import dispensing_terminal_test.methods.Doubles.WarehouseDB;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,7 +56,7 @@ public class DispensingTerminalMethodsTest {
         ProductID prod1 = new ProductID("111111111111");
         dispensingTerminal.enterProduct(prod1);
         assertEquals(dispensingTerminal.getSale().getProductSaleLine(prod1).getSale(), dispensingTerminal.getSale());
-        assertTrue(dispensingTerminal.getSale().getProductSaleLine(prod1).getProductSpec().equals(dispensingTerminal.getProductSpec(prod1)));
+        assertEquals(dispensingTerminal.getSale().getProductSaleLine(prod1).getProductSpec(), dispensingTerminal.getProductSpec(prod1));
         assertTrue(dispensingTerminal.getSale().getProductSaleLine(prod1).getMedDispensingLine().equals(dispensingTerminal.getePrescription().getMedicineDispensingLine(prod1)));
         BigDecimal subtotal = dispensingTerminal.getProductSpec(prod1).getPrice().multiply(dispensingTerminal.getSNS().getPatientContr(dispensingTerminal.getHCR().getHealthCardID()).getPatCont());
         assertEquals(dispensingTerminal.getSale().getProductSaleLine(prod1).getSubtotal(), subtotal);
