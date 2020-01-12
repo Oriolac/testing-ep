@@ -13,10 +13,15 @@ public class CashPayment extends Payment {
             throw new QuantityMinorThanImport("Quantitat entregada menor que import.");
         }
         this.change = quantity.subtract(imprt);
+        setChange();
     }
 
     public BigDecimal getChange() {
         return this.change;
+    }
+
+    public void setChange() {
+        super.setChange(change);
     }
 
 }

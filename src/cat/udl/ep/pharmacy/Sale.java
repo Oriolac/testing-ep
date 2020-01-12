@@ -7,11 +7,13 @@ import cat.udl.ep.data.ProductID;
 import cat.udl.ep.pharmacy.exceptions.ProductNotInDispensingException;
 import cat.udl.ep.pharmacy.exceptions.SaleClosedException;
 import cat.udl.ep.data.exceptions.ProductIDException;
+import cat.udl.ep.services.exceptions.ProductNotFoundException;
 
 import java.math.BigDecimal;
 import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /***
@@ -102,6 +104,17 @@ public class Sale implements SaleInt {
 
     public List<ProductSaleLine> getProductSaleLines() {
         return productSaleLines;
+    }
+
+    public ProductSaleLine getProductSaleLine(ProductID productID) throws ProductNotFoundException {
+        Iterator<ProductSaleLine> it = productSaleLines.iterator();
+        while(it.hasNext()) {
+            ProductSaleLine productSaleLine = it.next();
+            if (productSaleLine.getProductSpec().getProdID().equals(productID)) {
+                return productSaleLine;
+            }
+        }
+        throw new ProductNotFoundException();
     }
 
     public Dispensing getePrescription() { return ePrescription; }

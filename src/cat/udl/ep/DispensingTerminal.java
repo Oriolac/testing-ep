@@ -3,6 +3,7 @@ package cat.udl.ep;
 import cat.udl.ep.data.CashPayment;
 import cat.udl.ep.data.Payment;
 import cat.udl.ep.data.ProductID;
+import cat.udl.ep.data.exceptions.PatientIDException;
 import cat.udl.ep.services.exceptions.HealthCardException;
 import cat.udl.ep.data.exceptions.IDException;
 import cat.udl.ep.pharmacy.exceptions.*;
@@ -39,10 +40,11 @@ public class DispensingTerminal {
         this.warehouse = warehouse;
     }
 
-    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException {
+    public void getePrescription(char option) throws HealthCardException, NotValidePrescriptionException, ConnectException, PatientIDException {
         switch (option){
             case BY_HEALTHCARDID:
                 ePrescription = SNS.getePrescription(HCR.getHealthCardID());
+                ePrescription.setDispensingTerminal(this);
                 break;
             case BY_SHEET_TREATMENT:
                 break;
@@ -71,7 +73,7 @@ public class DispensingTerminal {
         sale.calculateFinalAmount();
     }
 
-    public void realizePayment(BigDecimal quantity) throws ConnectException, QuantityMinorThanImport, InsuficientExistencies, SaleNotClosedException, HealthCardException {
+    public void realizePayment(BigDecimal quantity) throws ConnectException, QuantityMinorThanImport, InsuficientExistencies, SaleNotClosedException, PatientIDException {
         if (!sale.isClosed())
             throw new SaleNotClosedException("La venda no està tancada.");
         Payment payment = new CashPayment(sale.getAmount(), quantity);

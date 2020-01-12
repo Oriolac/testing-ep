@@ -47,7 +47,7 @@ public class Dispensing {
     }
 
 
-    public boolean dispensingEnabled() throws DispensingNotAvailableException{
+    public boolean dispensingEnabled() throws DispensingNotAvailableException {
         if(Date.from(Instant.now()).after(getInitDate())) {
             return true;
         } else {
@@ -85,6 +85,10 @@ public class Dispensing {
 
     public DispensableMedicines getDispensableMedicines() {
         return medicineDispensingLines;
+    }
+
+    public DispensingTerminal getDispensingTerminal() {
+        return dispensingTerminal;
     }
 
     public void setCompleted() {

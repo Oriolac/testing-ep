@@ -174,7 +174,7 @@ public class SaleMethodsTest {
         public HCR() {}
 
         @Override
-        public HealthCardID getHealthCardID() throws HealthCardException {
+        public HealthCardID getHealthCardID() throws PatientIDException {
             return null;
         }
     }
